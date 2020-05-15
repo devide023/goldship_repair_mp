@@ -7914,7 +7914,18 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 35:
+/***/ 4:
+/*!***********************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/pages.json ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ 43:
 /*!*************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/api/login.js ***!
   \*************************************************************/
@@ -7934,7 +7945,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 36:
+/***/ 44:
 /*!****************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/head.png ***!
   \****************************************************************************/
@@ -7945,7 +7956,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABjCAYAAAAf
 
 /***/ }),
 
-/***/ 37:
+/***/ 45:
 /*!*********************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/icon_user.png ***!
   \*********************************************************************************/
@@ -7956,7 +7967,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACo
 
 /***/ }),
 
-/***/ 38:
+/***/ 46:
 /*!********************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/icon_pwd.png ***!
   \********************************************************************************/
@@ -7967,18 +7978,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAiCAYAAABM
 
 /***/ }),
 
-/***/ 4:
-/*!***********************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/pages.json ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ 49:
+/***/ 57:
 /*!******************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/api/user/index.js ***!
   \******************************************************************/
@@ -8005,7 +8005,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 66:
+/***/ 74:
 /*!******************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/components/evan-form/utils.js ***!
   \******************************************************************************/
@@ -8013,7 +8013,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _asyncValidator = _interopRequireDefault(__webpack_require__(/*! async-validator */ 67));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _asyncValidator = _interopRequireDefault(__webpack_require__(/*! async-validator */ 75));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var utils = {
   validate: function validate(model, rules, callback, options) {
     var initOptions = {
@@ -8129,7 +8129,7 @@ utils;exports.default = _default;
 
 /***/ }),
 
-/***/ 67:
+/***/ 75:
 /*!***********************************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/node_modules/async-validator/dist-web/index.js ***!
   \***********************************************************************************************/
@@ -9581,11 +9581,11 @@ Schema.messages = messages;
 Schema.validators = validators;var _default =
 
 Schema;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../tools/HBuilderX.2.6.16.20200424.full/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 68)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../tools/HBuilderX.2.6.16.20200424.full/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 76)))
 
 /***/ }),
 
-/***/ 68:
+/***/ 76:
 /*!********************************************************!*\
   !*** ./node_modules/node-libs-browser/mock/process.js ***!
   \********************************************************/
@@ -9616,7 +9616,7 @@ exports.binding = function (name) {
     var path;
     exports.cwd = function () { return cwd };
     exports.chdir = function (dir) {
-        if (!path) path = __webpack_require__(/*! path */ 69);
+        if (!path) path = __webpack_require__(/*! path */ 77);
         cwd = path.resolve(dir, cwd);
     };
 })();
@@ -9630,7 +9630,7 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 69:
+/***/ 77:
 /*!***********************************************!*\
   !*** ./node_modules/path-browserify/index.js ***!
   \***********************************************/
@@ -9940,11 +9940,11 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 68)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 76)))
 
 /***/ }),
 
-/***/ 75:
+/***/ 83:
 /*!******************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/components/uni-icons/icons.js ***!
   \******************************************************************************/

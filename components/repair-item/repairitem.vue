@@ -44,11 +44,9 @@
 <script>
 	import util from '../../utils/index.js'
 	import uniIcons from "@/components/uni-icons/uni-icons.vue"
-	import uniBadge from "@/components/uni-badge/uni-badge.vue"
 	export default {
 		components: {
-			"uni-icons":uniIcons,
-			"uni-badge":uniBadge
+			"uni-icons":uniIcons
 		},
 		props: {
 			repairitem: {

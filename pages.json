@@ -16,8 +16,7 @@
 		{
 			"path":"pages/repair/detail_info",
 			"style":{
-				"navigationBarTitleText":"维修记录",
-				"enablePullDownRefresh":true
+				"navigationBarTitleText":"维修记录"
 			}
 		},
 		{

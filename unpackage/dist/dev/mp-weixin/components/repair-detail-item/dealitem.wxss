@@ -10,9 +10,84 @@
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	        justify-content: center;
-	width: 100%;
 	margin: 0rpx auto 30rpx auto;
 	padding: 30rpx 20rpx;
 	background-color: #FFFFFF;
+	font-size: 14px;
+}
+.head.data-v-49c313ae{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	margin-bottom: 20rpx;
+	color: #4f4f4f;
+	text-align: left;
+}
+.banner.data-v-49c313ae{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-flex-flow:nowrap;
+	        flex-flow:nowrap;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	        justify-content: flex-start;
+	color: #005500;
+	font-size:14px;
+	font-weight: bold;
+}
+.dealinfo.data-v-49c313ae{
+	margin-bottom: 20rpx;
+	text-indent: 1rem;
+}
+.note.data-v-49c313ae{
+	margin-bottom: 20rpx;
+	text-indent: 1rem;
+}
+.images.data-v-49c313ae{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	        flex-wrap: nowrap;
+	white-space: nowrap;
+	height: 200rpx;
+	overflow: hidden;
+}
+.imageitem.data-v-49c313ae{
+	width: 180rpx;
+	height: 180rpx;
+	display: inline-block;
+	margin-right: 20rpx;
+}
+.end.data-v-49c313ae{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	margin-bottom: 20rpx;
+	font-size: 10px;
+	color: #4f4f4f;
 }
 

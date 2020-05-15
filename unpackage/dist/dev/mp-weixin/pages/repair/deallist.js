@@ -149,7 +149,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ../../api/repair/ind
 //
 //
 //
-var repairitem = function repairitem() {__webpack_require__.e(/*! require.ensure | components/repair-item/repairitem */ "components/repair-item/repairitem").then((function () {return resolve(__webpack_require__(/*! ../../components/repair-item/repairitem.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { 'repair-item': repairitem }, data: function data() {
+var repairitem = function repairitem() {__webpack_require__.e(/*! require.ensure | components/repair-item/repairitem */ "components/repair-item/repairitem").then((function () {return resolve(__webpack_require__(/*! ../../components/repair-item/repairitem.vue */ 94));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { 'repair-item': repairitem }, data: function data() {
     return {
       userinfo: {},
       list: [],
