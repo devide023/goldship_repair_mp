@@ -1,0 +1,1 @@
+<view><block wx:for="{{list}}" wx:for-item="item" wx:for-index="__i0__" wx:key="id"><repair-item vue-id="{{'7add1383-1-'+__i0__}}" repairitem="{{item}}" data-event-opts="{{[['^dealrepair',[['dealhandle']]],['^repairdetail',[['detailhandle']]]]}}" bind:dealrepair="__e" bind:repairdetail="__e" bind:__l="__l"></repair-item></block></view>

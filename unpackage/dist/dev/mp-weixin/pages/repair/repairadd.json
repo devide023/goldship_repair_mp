@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "新增报修单",
+  "usingComponents": {
+    "evan-form": "/components/evan-form/evan-form",
+    "evan-form-item": "/components/evan-form-item/evan-form-item"
+  }
+}

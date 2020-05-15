@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "报修单处理",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "repair-item": "/components/repair-item/repairitem"
+  }
+}

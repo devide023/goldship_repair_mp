@@ -1,0 +1,1 @@
+<view><block wx:for="{{list}}" wx:for-item="item" wx:for-index="__i0__" wx:key="id"><list-card vue-id="{{'43471def-1-'+__i0__}}" cardinfo="{{item}}" bind:__l="__l"></list-card></block><uni-load-more vue-id="43471def-2" status="{{more}}" bind:__l="__l"></uni-load-more></view>
