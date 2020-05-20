@@ -1,1 +1,1 @@
-<view></view>
+<view><block wx:for="{{list}}" wx:for-item="item" wx:for-index="__i0__" wx:key="id"><repair-item vue-id="{{'4a180d5e-1-'+__i0__}}" repairitem="{{item}}" bind:__l="__l"></repair-item></block></view>

@@ -2,39 +2,25 @@
 	<view>
 		<view class="container">
 			<view class="content">
-				
+
 				<view class="tag">
+					<image class="headimg" :src="headimgurl" mode="aspectFit"></image>
 					<view class="repairno">{{repairitem.repairno}}</view>
 					<view class="status">{{repairitem.statusname.name}}</view>
 					<view class="type">{{repairitem.typename.name}}</view>
 				</view>
-				
+
 				<view class="title">{{repairitem.title}}</view>
 				<view class="describe">{{repairitem.content}}</view>
-				
-				<scroll-view scroll-x="true" class="images">
-					<image v-for="(item,index) in imglist" :key="index" :src="item" mode="aspectFit" @click="previewimgs(item)" class="imgitem"></image>
-				</scroll-view>
-				
+
+				<previewimg :imglist="imglist" v-if="imglist.length>0"></previewimg>
+
 				<view class="usercontainer">
 					<view class="adduser">报修人：{{repairitem.addusername.name}}</view>
 					<view class="addtime">报修日期：{{repairitem.addtime}}</view>
 				</view>
 				
-				<view class="btncontainer">
-					<view class="btnitem" v-if="isdeal" @click="deal_repairbill">
-						<uni-icons type="compose" color="#007AFF"></uni-icons>处理
-					</view>
-					<view class="btnitem" v-if="issend" @click="send_repairbill">
-						<uni-icons type="paperplane-filled" color="#007AFF"></uni-icons>派单
-					</view>
-					<view class="btnitem" v-if="ischeck" @click="check_repairbill">
-						<uni-icons type="checkmarkempty" color="#007AFF"></uni-icons>验收
-					</view>
-					<view class="btnitem" @click="view_deal_detail">
-						<uni-icons type="info" color="#007AFF"></uni-icons>维修详情({{repairitem.details.length}})
-					</view>
-				</view>
+				<slot name="buttons"></slot>
 				
 			</view>
 		</view>
@@ -43,10 +29,10 @@
 
 <script>
 	import util from '../../utils/index.js'
-	import uniIcons from "@/components/uni-icons/uni-icons.vue"
+	import previewimg from '../previewimages/previewimages.vue'
 	export default {
 		components: {
-			"uni-icons":uniIcons
+			"previewimg":previewimg
 		},
 		props: {
 			repairitem: {
@@ -54,24 +40,14 @@
 			}
 		},
 		computed: {
+			headimgurl(){
+				return this.head_img_url+this.repairitem.addusername.headimg;
+			},
 			imglist() {
 				const that = this;
-				return this.repairitem.images.map(function(i){
-					return that.repairimgurl+i.filename;
-				}) 
-			},
-			isdeal(){
-				if(this.repairitem.status === '01' && this.repairitem.dealuserid>0){
-					return true;
-				}
-			},
-			issend(){
-					if(this.repairitem.status === '01' && this.repairitem.senduserid>0){
-						return true;
-					}
-			},
-			ischeck(){
-					return false;
+				return this.repairitem.images.map(function(i) {
+					return that.repairimgurl + i.filename;
+				})
 			}
 		},
 		mounted() {
@@ -79,55 +55,24 @@
 		},
 		data() {
 			return {
-				userinfo:{},
+				userinfo: {},
+				head_img_url: util.rooturl + 'storage/',
 				repairimgurl: util.rooturl + 'repair/'
 			}
 		},
 		methods: {
-			inituserinfo(){
+			inituserinfo() {
 				const userinfo = uni.getStorageSync('userinfo');
-				if(userinfo){
+				if (userinfo) {
 					this.userinfo = userinfo;
 				}
-			},
-			previewimgs(imagepath) {
-				uni.previewImage({
-					urls: this.imglist,
-					current: imagepath,
-					indicator: 'default',
-					longPressActions: {
-						itemList: ['发送给朋友', '保存图片', '收藏'],
-						success: function(data) {
-							console.log(data.index + 1);
-						},
-						fail: function(err) {
-							console.log(err.errMsg);
-						}
-					},
-					success(res) {
-						console.log(res);
-					}
-				})
-			},
-			deal_repairbill(){
-				this.$emit('dealrepair',this.repairitem);
-			},
-			send_repairbill(){
-				this.$emit('sendrepair',this.repairitem);
-			},
-			check_repairbill(){
-				this.$emit('checkrepair',this.repairitem);
-			},
-			view_deal_detail()
-			{
-				this.$emit('repairdetail',this.repairitem);
 			}
 		},
 	}
 </script>
 
 <style scoped>
-	.container{
+	.container {
 		display: flex;
 		flex-flow: row nowrap;
 		width: 95%;
@@ -138,11 +83,13 @@
 		padding-right: 20rpx;
 		background-color: #FFFFFF;
 	}
-	.content{
+
+	.content {
 		width: 100%;
 		overflow: hidden;
 	}
-	.tag{
+
+	.tag {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
@@ -151,8 +98,17 @@
 		color: #FFFFFF;
 		text-align: center;
 		margin-bottom: 30rpx;
+		height: 90rpx;
+		line-height: 90rpx;
+		align-items: center;
 	}
-	.repairno{
+	.headimg{
+		margin-right: 20rpx;
+		width: 90rpx;
+		height: 90rpx;
+		border-radius: 90rpx;
+	}
+	.repairno {
 		width: 150rpx;
 		height: 40rpx;
 		line-height: 40rpx;
@@ -160,7 +116,8 @@
 		margin-right: 10rpx;
 		background-color: #007AFF;
 	}
-	.status{
+
+	.status {
 		width: 150rpx;
 		height: 40rpx;
 		line-height: 40rpx;
@@ -168,7 +125,8 @@
 		margin-right: 10rpx;
 		background-color: #ff5500;
 	}
-	.type{
+
+	.type {
 		width: 150rpx;
 		height: 40rpx;
 		line-height: 40rpx;
@@ -176,36 +134,23 @@
 		margin-right: 10rpx;
 		background-color: #00aa00;
 	}
-	.title{
+
+	.title {
 		font-size: 14px;
 		color: #007AFF;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	.describe{
+
+	.describe {
 		font-size: 13px;
-		text-indent: 2rem;
+		text-indent: 1rem;
 		padding-right: 10rpx;
 		margin-bottom: 20rpx;
 	}
-	.images{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		height: 200rpx;
-		margin-bottom: 30rpx;
-		white-space: nowrap;
-	}
-	.imgitem{
-		display: inline-block;
-		width: 180rpx;
-		height: 180rpx;
-		margin-right: 30rpx;
-		padding: 2rpx;
-		border: #f0f0f0 solid 1rpx;
-	}
-	.usercontainer{
+
+	.usercontainer {
 		display: flex;
 		flex-direction: row;
 		margin-bottom: 30rpx;
@@ -214,24 +159,14 @@
 		font-size: 10px;
 		color: #3F536E;
 	}
-	.adduser{
+
+	.adduser {
 		text-align: left;
 		padding-left: 20rpx;
 	}
-	.addtime{
+
+	.addtime {
 		text-align: right;
 		padding-right: 20rpx;
-	}
-	.btncontainer {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		margin: 50rpx auto 30rpx auto;
-		flex-wrap: nowrap;
-	}
-	
-	.btnitem {
-		font-size: 13px;
-		color: #007AFF;
 	}
 </style>

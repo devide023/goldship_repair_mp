@@ -1,5 +1,6 @@
 import util from '../../utils/index.js'
 export default{
+	//报修
 	addrepair:(data)=>{
 		return util.request({
 			url:'/repair/add',
@@ -7,6 +8,7 @@ export default{
 			data:data
 		});
 	},
+	//添加维修记录
 	addrepair_detail:(data)=>{
 		return util.request({
 			url:'/repair/savedealinfo',
@@ -47,11 +49,41 @@ export default{
 			data:data
 		});
 	},
+	myrepairlist:(data)=>{
+		return util.request({
+			url:'/repair/myrepairlist',
+			method:'GET',
+			data:data
+		});
+	},
+	mytasklist:(data)=>{
+		return util.request({
+			url:'/repair/mytasklist',
+			method:'GET',
+			data:data
+		});
+	},
+	//维修记录
 	repairinfo_list:(data)=>{
 		return util.request({
 			url:'/repair/repair_infolist',
 			method:'POST',
 			data:data
+		});
+	},
+	//获取报修详情
+	repairinfo:(data)=>{
+		return util.request({
+				url:'/repair/find',
+				method:'GET',
+				data:data
+		});
+	},
+	repairimgs:(data)=>{
+		return util.request({
+				url:'/repair/images',
+				method:'GET',
+				data:data
 		});
 	},
 	repairimg_uploadurl:util.baseurl+'/repair/upload/repairimg',

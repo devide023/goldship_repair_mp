@@ -55,26 +55,6 @@
 	margin-bottom: 20rpx;
 	text-indent: 1rem;
 }
-.images.data-v-49c313ae{
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	        flex-direction: row;
-	-webkit-flex-wrap: nowrap;
-	        flex-wrap: nowrap;
-	white-space: nowrap;
-	height: 200rpx;
-	overflow: hidden;
-}
-.imageitem.data-v-49c313ae{
-	width: 180rpx;
-	height: 180rpx;
-	display: inline-block;
-	margin-right: 20rpx;
-}
 .end.data-v-49c313ae{
 	display: -webkit-box;
 	display: -webkit-flex;

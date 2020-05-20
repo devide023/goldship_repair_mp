@@ -10,13 +10,13 @@
 	width: 96%;
 	margin: 20rpx auto;
 	border: 1px solid #f0f0f0;
-	border-radius: 20rpx;
 }
 .img {
 	margin: 20rpx 0px 20rpx 50rpx;
 	height: 90rpx;
 	width: 90rpx;
-	border-radius: 90rpx;
+	-webkit-border-radius: 90rpx;
+	        border-radius: 90rpx;
 	display: -webkit-inline-box;
 	display: -webkit-inline-flex;
 	display: inline-flex;
@@ -46,7 +46,8 @@
 	text-align: center;
 	height: 40rpx;
 	line-height: 40rpx;
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 	color: #F2F2F2;
 	margin-left: 250rpx;
 	margin-top: -35rpx;
@@ -83,7 +84,8 @@
 	text-align: center;
 	height: 40rpx;
 	line-height: 40rpx;
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 	color: #F2F2F2;
 	margin-left: 370rpx;
 	margin-top: -35rpx;
@@ -95,7 +97,8 @@
 	width: 135rpx;
 	height: 40rpx;
 	line-height: 40rpx;
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 	color: #fdfdfd;
 	margin-left: 530rpx;
 	margin-top: -35rpx;
@@ -126,23 +129,5 @@
 	height: 100rpx;
 	overflow: hidden;
 	margin: 10rpx;
-}
-.btns {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	        flex-direction: row;
-	-webkit-justify-content: space-around;
-	        justify-content: space-around;
-	margin: 20rpx auto;
-	-webkit-flex-wrap: nowrap;
-	        flex-wrap: nowrap;
-}
-.btnitem {
-	font-size: 12px;
-	color: #3F536E;
 }
 

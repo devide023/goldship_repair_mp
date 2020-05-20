@@ -20,19 +20,6 @@
 					<image v-for="(item,index) in repairimglist" :key="index" class="imgitem" :src="item" mode="aspectFit" @click="previewimgs(item)"></image>
 				</view>
 			</view>
-
-			<view class="btns">
-				<view class="btnitem">
-					<uni-icons type="compose"></uni-icons>处理
-				</view>
-				<view class="btnitem">
-					<uni-icons type="paperplane-filled"></uni-icons>派单
-				</view>
-				<view class="btnitem">
-					<uni-icons type="checkmarkempty"></uni-icons>验收
-				</view>
-			</view>
-
 		</view>
 	</view>
 
@@ -40,11 +27,7 @@
 
 <script>
 	import util from '../../utils/index.js'
-	import uniIcons from "@/components/uni-icons/uni-icons.vue"
 	export default {
-		components: {
-			'uni-icons': uniIcons
-		},
 		name: 'card',
 		props: {
 			cardinfo: {
@@ -110,7 +93,6 @@
 		width: 96%;
 		margin: 20upx auto;
 		border: 1px solid #f0f0f0;
-		border-radius: 20upx;
 	}
 
 	.img {
@@ -225,18 +207,5 @@
 		height: 100rpx;
 		overflow: hidden;
 		margin: 10rpx;
-	}
-
-	.btns {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		margin: 20rpx auto;
-		flex-wrap: nowrap;
-	}
-
-	.btnitem {
-		font-size: 12px;
-		color: #3F536E;
 	}
 </style>

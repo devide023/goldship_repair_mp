@@ -12,8 +12,7 @@
 			<view>备注</view>
 		</view>
 		<view class="note">{{detailitem.note}}</view>
-		<scroll-view scroll-x="true" class="images" v-if="images.length>0">
-			<image class="imageitem"  v-for="item in images" :key="item.id" :src="item" mode="aspectFit" @click="previewimgs(item)"></image>
+		<previewimg v-if="images.length>0" :imglist="images"></previewimg>
 		</scroll-view>
 		<view class="end">
 			<view>操作人：{{detailitem.adduser.name}}</view>
@@ -25,7 +24,11 @@
 
 <script>
 	import utils from '../../utils/index.js'
+	import previewimg from '../previewimages/previewimages.vue'
 	export default {
+		components: {
+			"previewimg":previewimg
+		},
 		props:{
 			detailitem:{
 				type: Object
@@ -45,25 +48,6 @@
 			}
 		},
 		methods: {
-			previewimgs(imagepath) {
-				uni.previewImage({
-					urls: this.images,
-					current: imagepath,
-					indicator: 'default',
-					longPressActions: {
-						itemList: ['发送给朋友', '保存图片', '收藏'],
-						success: function(data) {
-							console.log(data.index + 1);
-						},
-						fail: function(err) {
-							console.log(err.errMsg);
-						}
-					},
-					success(res) {
-						console.log(res);
-					}
-				})
-			},
 		},
 	}
 </script>
@@ -104,20 +88,6 @@
 	.note{
 		margin-bottom: 20rpx;
 		text-indent: 1rem;
-	}
-	.images{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		white-space: nowrap;
-		height: 200rpx;
-		overflow: hidden;
-	}
-	.imageitem{
-		width: 180rpx;
-		height: 180rpx;
-		display: inline-block;
-		margin-right: 20rpx;
 	}
 	.end{
 		display: flex;

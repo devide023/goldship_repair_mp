@@ -21,7 +21,7 @@
 						<view class="form-input" @click="opensheet">
 							<view>{{repairform.images.length}}</view>
 							</view>
-				</evan-form-item>
+				</evan-form-item>	
 			<evan-form-item label="报修人">
 				<input class="form-input" placeholder-class="form-input-placeholder" v-model="repairform.adduser" placeholder="请输入报修人" />
 			</evan-form-item>

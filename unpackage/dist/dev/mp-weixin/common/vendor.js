@@ -720,10 +720,10 @@ function initVueComponent(Vue, vueOptions) {
   var VueComponent;
   if (isFn(vueOptions)) {
     VueComponent = vueOptions;
-    vueOptions = VueComponent.extendOptions;
   } else {
     VueComponent = Vue.extend(vueOptions);
   }
+  vueOptions = VueComponent.options;
   return [VueComponent, vueOptions];
 }
 
@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1409,6 +1409,10 @@ function parseBaseComponent(vueComponentOptions)
       __e: handleEvent } };
 
 
+  // externalClasses
+  if (vueOptions.externalClasses) {
+    componentOptions.externalClasses = vueOptions.externalClasses;
+  }
 
   if (Array.isArray(vueOptions.wxsCallMethods)) {
     vueOptions.wxsCallMethods.forEach(function (callMethod) {
@@ -1785,71 +1789,33 @@ var rooturl = 'http://192.168.20.72:8081/';var _default =
 /***/ }),
 
 /***/ 18:
-/*!********************************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/api/repair/index.js ***!
-  \********************************************************************/
+/*!*************************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/api/login.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../../utils/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../utils/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
-  addrepair: function addrepair(data) {
+  checklogin: function checklogin(data) {
     return _index.default.request({
-      url: '/repair/add',
+      url: '/login',
       method: 'POST',
       data: data });
 
-  },
-  addrepair_detail: function addrepair_detail(data) {
-    return _index.default.request({
-      url: '/repair/savedealinfo',
-      method: 'POST',
-      data: data });
+  } };exports.default = _default;
 
-  },
-  repairtypes: function repairtypes() {
-    return _index.default.request({
-      url: '/baseinfo/repairtypes',
-      method: 'GET' });
+/***/ }),
 
-  },
-  repairno: function repairno() {
-    return _index.default.request({
-      url: '/repair/repairno',
-      method: 'GET' });
+/***/ 19:
+/*!****************************************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/head.png ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-  },
-  removeimgs: function removeimgs(data) {
-    return _index.default.request({
-      method: 'POST',
-      url: '/repair/removeimgs',
-      data: data });
-
-  },
-  removedetailimgs: function removedetailimgs(data) {
-    return _index.default.request({
-      method: 'POST',
-      url: '/repair/removedetailimgs',
-      data: data });
-
-  },
-  list: function list(data) {
-    return _index.default.request({
-      url: '/repair/list',
-      method: 'POST',
-      data: data });
-
-  },
-  repairinfo_list: function repairinfo_list(data) {
-    return _index.default.request({
-      url: '/repair/repair_infolist',
-      method: 'POST',
-      data: data });
-
-  },
-  repairimg_uploadurl: _index.default.baseurl + '/repair/upload/repairimg',
-  repairdetail_uploadimgurl: _index.default.baseurl + '/repair/upload/detailimg' };exports.default = _default;
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABjCAYAAAAfKMdaAAAKhElEQVR4Xu2de6wcVR3Hv7/ZvXfmnNnLlpYWUIqhQANFrQ0XMRqIiAqoECVWCFZiBEtaSCjRJtAKGFQIiRHFBy9FHvERbCAEBRLBqjFBKNUgaXmavrA8mt62d3de9+7O18y9fQC9j92dOTN7b9jkJv3j9/ue7++zp2dnzpxzRtBlnx072KdUdCoQ94uUTqBwniU4Io45S0RcACUQNQh2QvAKiY1CrNXafkJEoi4rB9INht56i5W+vuHFZLyEwGkAetr1RXJAgNu0dm4WkVq7+abiCwU8MDBQtW21kpArRFDNpkhuZck6t2Lb/8lGL51KYYA9L/oiEN8GkSPSlTBWNt8U8BSt9bbstdtTzB0wSSsIopsJfAswOUTJAIRPk/L3psU1Vcd5tT002UTnCpik+P7Q3RB+PRv7LavEAP4YN+Xqvj77hZazMgjMFbDnBd+DyHcy8N2RhIiEjLnCdZ07OhLoICk3wLVa8CmrJH8GYHXgM8sUCvBtrZ0fZSk6nlYugEn2eEG0QYDj8yiqhTaalpTOUqrnyRZiU4XkArjmhZdZgttTOc0+edPAzh0nzZ07N8he+oBiLoDrfviCACeYLKQTbQGu1Nq5tZPcVnOMA/Z9/2OE9VSrhvKMI/BKRTvzTbZpHnAQ3UTyapNFpNJms9913fWpNCZINg7Y86N/AjzVVAFpdRlzVaWibkqrU8hVRHL14AdRMvFimyogA92HXO2cn4HOmBJGe/BgFJ1QajLXO6d2QZF4oeI6C9rNazXeKOAwDM9qxni8VTOFxAkGXeVkNJN3cAVGAdfrwcViyb2FgGujUa3sHhFptJHScqhRwDU/vMICftqym4ICo9CfMXPmzD0mmjcK2PfDFQRuMWE8S02t7BkiMvUA1/3wSgF+nCUME1pa2VpEjNwyG+3BXhguRYzcpgY7hD/saqe3w9xJ04wCrvn+hRas303qotiAN1ztHGnKglHAQTB8ZszmE6bMZ6Mr61xtfzQbrZwv02pRdKLV5EZT5rPQFcgDWtsXZKE1lobRHkxS+UHkmX24mRKN8AZXqetTqoybbhRw0qrnh1sBzDVVQFrdGPHiPq3XpNUZL988YC/8EwSfM1VAWt1h4bwZSm1Kq1Mc4CC6EeQ1pgpIp8s3XK2MXUEk3oz34C6/VFvjamdxui9p4mzjgMMwnNeM8V+TRXSsTSx3Xee2jvNbSDQOeO8P3esADKxBa6HCCUIawzi+WjW7pCovwA8C+FI6HJlnb3a1c0zmqu8SNA44CIJPxpTHADimi2lTnxgdIoyu1zAKmGTJD8KXAZnXZvF5hQeMG/Mqlcobpho0CrhWC063SvI3U+Yz0SWucF3n55lojSFiFLAXBJeA8ktT5rPQTeartXauykJrLA2jgH0/uoDg702Zz0RX5Aeuso0tqTUMuHuXTe3/csS61FW9v8rky8p7iCCp/SDaBcDYE4PUYGid7Lq9/0qtM46A0R6ctOn74RMEzjRVQErd7VrZc0Uk2WJg5GMccL0efE0suc+I+5SiBG6uaMfowkTjgEmW/SB6BsCilDyyTn9TK3uBiAxkLfx2PeOAR4cJ/yii9CDAU0wW06q2CF6Mm40LK5XKc63mdBqXC+DE3OgWruibkGIf4yfDgqvsVSbH3dx78L4G6/X6EWKVk5m1wj6McU6l4uS2IDG3HryPqOeHWwAcXRDhuDEcza5Wq0bH3cJ6cNKw54V3QLC0CMACWacNroEYq6bce3C9Hp4tFpLpy/w/IqtdZd+YZ8O5Ax6ZwvTDzRA5Ks9CATSHIh536KFqc57t5g54dJgIVkPk+3kWmmwGd7Vzbs5tmn+qPFZBJKueH23J7hCOybEJ4tO01v+YPDLbiEJ6cFJCvR5cI5bkMx4KHnWV8/ls0bWmVhhgkr1+GK0H8cHWrHYc5TeG8ZFq1XmlY4UUiYUBTjzXatECsfiUCA5JUcNEqWTMb1Qq6h5D+pPKFgp49AdvqB8Sr5vUaScB5LWuq/L+MX2H08IBj0D2w+S8s8wn5UsWPuM4TqELwLsCsB+EAZn9uglL+GmllPFDNyb6z/Ue4E6GnjZy3gPcBqxOQrsFcEhmvyP/vSFib5fw/JCd9I7Jchjjs5WKk5x0Vdin8B6895ndsBECxHmu6zxiRLtF0cIB79mzZ2a5x97Zot+2wihcUlHqN20lZRxcOODBwXB+qYyXMq5rRI7Aiop2fmJCu1XNwgF7XngeBA+3aritOMGdrnIuaysn4+DCAft++BcCZ2Rc1z65Otic77puYQ9aCwXseeHlEPzMENxRWcFj2rG/kNdj+nfXUhhg34++QjD5ASobBTy6JuPedc84l55xhpljYybynzvgkcsyP7wOIqvzPIlVgCfJ5sWu6243/YW+XT9XwJ43dAqEvwDYn2eR+9oisUvAlVo7v85ryMgFcC2KTio141WEXJhnrx33SySeF5HvKtX7kIgYuYvc17ZRwKNbuKwVAJOnuUUfzHwQbxF5sRHzlj5t35ecjm3if1XmgEn2+X70VQDLIPiwCdPZa8pOgdzTaMR3HnKI83KW+pkB9jzvZFilpSAuAlDJ0mSOWjGBtYTc/tLG5x/u7+9PPUeSCjBJJwyHL4jJ5QCNnXuTI+ADTZHJzcldIrxTa/2/Tj10BLhWq82xrPLlBJaJyOxOG58iecMCriFLP+xks0xbgOv1+uGW1buSiJcB0FMEUFY2k73NjwHN69o50LklwCRtzwuuskqlVcmPWFaOp6hOTPC3UM7Kisike5wnBTzo+58oi3U3CaNnnU812CR2g7xqskUt4wIe2VMRDq0W8nrmMF8w1QAfuJGQB5TqvURE6mPVMCbgTZs2OXMOP/J+AF+eqoXn6nvkzjA+Z6yrjYMAb9u2Tc06bPYjZNfuzsyVXRuNbRLEp2utXxt3sid5FZkfDP0BoLFD49swPOVCSWyIQu/js2bNGhxzLsLzomshvGHKVdZNhomHXPfAWw32DxFRFH2o0WTywo6236fZTfV1gxcivqii9cixvvsBe0H4OIizusHgNPDwmlb2cclbckcAe97QyXvX6E56XTwNis+nBHKp66q79gIubnNgPtUW0sp6Vzv9MnrlEL4JyGGF2JjGjQ4P4VjZOzw8O43rLK40Ypl4YbgcMYydG1ZcdV3Qssg9UveD+wWypAvsTEML8rR4fpCMv3OmYXWFl0RiUMIwPLsR8xqBnF64o+ljIHm18F9ZklsP3Gh43iJY5fPB5Lx1LgRQmj715lJJE5B/g3i0XMYDtm1veMed3Nst7Nq1a4ZSqr8RxwsBWSiQ5PH7iSb2suVSesaNJHdoyYv+QDwnwpE/x3GeFZH9kzxjTvZM5GPtWpYXLYo+UC7jWBEcA/BosayjQb4fIkfGMd9ncEtsxogmkSP2UPC6BWyPwe0i1hbE3Epic6OBV6tVe4uINFsxlemtcfIYPwiC2SyXZ3MonmlZUiXj5FViVYrMAJn8VSHiglAUKAEVIEoARUAl7/8k0SMy8lcCkaxtGu9w51AkWTyJJolhESTrGCICgQABwGDk35QAgoCkN/JaM5HdQu4WsXaT3CMS747j0i6RnreUwo6kh7YCr5WY/wM/ULoOhk/KqwAAAABJRU5ErkJggg=="
 
 /***/ }),
 
@@ -7385,7 +7351,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7406,14 +7372,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7489,7 +7455,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7883,6 +7849,28 @@ internalMixin(Vue);
 
 /***/ }),
 
+/***/ 20:
+/*!*********************************************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/icon_user.png ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,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"
+
+/***/ }),
+
+/***/ 21:
+/*!********************************************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/icon_pwd.png ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAiCAYAAABMfblJAAACQklEQVRYR+2WwWsTURDGv9lUkjbZpdWLCgVP6kEPpSLYgoiEbA9WT568iLbm5ST6hyie8mIqePDmSRTtxiIiaEEsCiLoTVBsQNSym9BEkx3ZpbFNsptmt6ZQyF7fzPxmvve9t4/Q4UuK8piCehqg0wAOELDLK5yBPwA+A/wsgkjuiYy/9StLXgsnzn8Z1PYM32LGDBE8Y/wKMoOJMGf+WLm6eH90tTWurZgDU3cPzxPhJIAKGJIV5d7v1aEPz+9SxQs0eem7Go8OHQTXLxAoAyDGjBfWz5WpVmgbUBdmHqAZML7adm36aX7kXSfZW9dSwjpCoMcAjwI8Z0htdmNMEzB5+deYMjCwRIRq3abjC7cT74PAGrHJK6WjEYVfMyNq12rjC3dG/u1pE1BPW1kQBINuFmTiehhYIyclzBsEugaCNLKqI7P7NQOF9RHAISblWCEbX9oSMFMeJ7bfAPhkSPWwD7BUATharSQG/QzSbROnLnIsGis5Lq0aUo35TcjOgiHVQEfBrwldWG31WiXtA7vdQjfOU9KpTPkss50DsDdQteDBRSIlTbqwlrcB1miv6ABdo3CdJwt57VXwxjfPSM2aExShl+7B99J58xLBIxqcPjC4dj4ZO0vSMEbb0oR9oJdvQkuaEuYZAj10byfwdEFqj7qxcmigLqxvAPatvVCWDZnY32vgxsu+aEh1Dd4ZG37CtHkORNItzyyMnPagpxN2U/y/mmbnAol5Yj6nLYadoFNe6w94m58Y667r+SPKcfVfmtVWedJzenUAAAAASUVORK5CYII="
+
+/***/ }),
+
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -7914,98 +7902,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 4:
-/*!***********************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/pages.json ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ 43:
-/*!*************************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/api/login.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../utils/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
-{
-  checklogin: function checklogin(data) {
-    return _index.default.request({
-      url: '/login',
-      method: 'POST',
-      data: data });
-
-  } };exports.default = _default;
-
-/***/ }),
-
-/***/ 44:
-/*!****************************************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/head.png ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-
-/***/ 45:
-/*!*********************************************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/icon_user.png ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-
-/***/ 46:
-/*!********************************************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/pages/login/images/icon_pwd.png ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAiCAYAAABMfblJAAACQklEQVRYR+2WwWsTURDGv9lUkjbZpdWLCgVP6kEPpSLYgoiEbA9WT568iLbm5ST6hyie8mIqePDmSRTtxiIiaEEsCiLoTVBsQNSym9BEkx3ZpbFNsptmt6ZQyF7fzPxmvve9t4/Q4UuK8piCehqg0wAOELDLK5yBPwA+A/wsgkjuiYy/9StLXgsnzn8Z1PYM32LGDBE8Y/wKMoOJMGf+WLm6eH90tTWurZgDU3cPzxPhJIAKGJIV5d7v1aEPz+9SxQs0eem7Go8OHQTXLxAoAyDGjBfWz5WpVmgbUBdmHqAZML7adm36aX7kXSfZW9dSwjpCoMcAjwI8Z0htdmNMEzB5+deYMjCwRIRq3abjC7cT74PAGrHJK6WjEYVfMyNq12rjC3dG/u1pE1BPW1kQBINuFmTiehhYIyclzBsEugaCNLKqI7P7NQOF9RHAISblWCEbX9oSMFMeJ7bfAPhkSPWwD7BUATharSQG/QzSbROnLnIsGis5Lq0aUo35TcjOgiHVQEfBrwldWG31WiXtA7vdQjfOU9KpTPkss50DsDdQteDBRSIlTbqwlrcB1miv6ABdo3CdJwt57VXwxjfPSM2aExShl+7B99J58xLBIxqcPjC4dj4ZO0vSMEbb0oR9oJdvQkuaEuYZAj10byfwdEFqj7qxcmigLqxvAPatvVCWDZnY32vgxsu+aEh1Dd4ZG37CtHkORNItzyyMnPagpxN2U/y/mmbnAol5Yj6nLYadoFNe6w94m58Y667r+SPKcfVfmtVWedJzenUAAAAASUVORK5CYII="
-
-/***/ }),
-
-/***/ 57:
-/*!******************************************************************!*\
-  !*** D:/workspace/repair_miniproject/repairmp/api/user/index.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../../utils/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
-{
-  userinfo: function userinfo(data) {
-    return _index.default.request({
-      url: '/mp/userinfo',
-      method: 'GET',
-      data: data });
-
-  },
-  usermenus: function usermenus(data) {
-    return _index.default.request({
-      url: '/mp/menus',
-      method: 'GET',
-      data: data });
-
-  } };exports.default = _default;
-
-/***/ }),
-
-/***/ 74:
+/***/ 32:
 /*!******************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/components/evan-form/utils.js ***!
   \******************************************************************************/
@@ -8013,7 +7910,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _asyncValidator = _interopRequireDefault(__webpack_require__(/*! async-validator */ 75));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _asyncValidator = _interopRequireDefault(__webpack_require__(/*! async-validator */ 33));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var utils = {
   validate: function validate(model, rules, callback, options) {
     var initOptions = {
@@ -8129,7 +8026,7 @@ utils;exports.default = _default;
 
 /***/ }),
 
-/***/ 75:
+/***/ 33:
 /*!***********************************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/node_modules/async-validator/dist-web/index.js ***!
   \***********************************************************************************************/
@@ -8249,7 +8146,7 @@ function _wrapNativeSuper(Class) {
 var formatRegExp = /%[sdj%]/g;
 var warning = function warning() {}; // don't print warning message when in production env or node runtime
 
-if (typeof process !== 'undefined' && Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}) && "development" !== 'production' && typeof window !== 'undefined' && typeof document !== 'undefined') {
+if (typeof process !== 'undefined' && Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}) && "development" !== 'production' && typeof window !== 'undefined' && typeof document !== 'undefined') {
   warning = function warning(type, errors) {
     if (typeof console !== 'undefined' && console.warn) {
       if (errors.every(function (e) {
@@ -9581,11 +9478,11 @@ Schema.messages = messages;
 Schema.validators = validators;var _default =
 
 Schema;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../tools/HBuilderX.2.6.16.20200424.full/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 76)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../tools/HBuilderX.2.6.16.20200424.full/HBuilderX/plugins/uniapp-cli/node_modules/node-libs-browser/mock/process.js */ 34)))
 
 /***/ }),
 
-/***/ 76:
+/***/ 34:
 /*!********************************************************!*\
   !*** ./node_modules/node-libs-browser/mock/process.js ***!
   \********************************************************/
@@ -9616,7 +9513,7 @@ exports.binding = function (name) {
     var path;
     exports.cwd = function () { return cwd };
     exports.chdir = function (dir) {
-        if (!path) path = __webpack_require__(/*! path */ 77);
+        if (!path) path = __webpack_require__(/*! path */ 35);
         cwd = path.resolve(dir, cwd);
     };
 })();
@@ -9630,7 +9527,7 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 77:
+/***/ 35:
 /*!***********************************************!*\
   !*** ./node_modules/path-browserify/index.js ***!
   \***********************************************/
@@ -9940,11 +9837,123 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 76)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 34)))
 
 /***/ }),
 
-/***/ 83:
+/***/ 36:
+/*!********************************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/api/repair/index.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../../utils/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+{
+  //报修
+  addrepair: function addrepair(data) {
+    return _index.default.request({
+      url: '/repair/add',
+      method: 'POST',
+      data: data });
+
+  },
+  //添加维修记录
+  addrepair_detail: function addrepair_detail(data) {
+    return _index.default.request({
+      url: '/repair/savedealinfo',
+      method: 'POST',
+      data: data });
+
+  },
+  repairtypes: function repairtypes() {
+    return _index.default.request({
+      url: '/baseinfo/repairtypes',
+      method: 'GET' });
+
+  },
+  repairno: function repairno() {
+    return _index.default.request({
+      url: '/repair/repairno',
+      method: 'GET' });
+
+  },
+  removeimgs: function removeimgs(data) {
+    return _index.default.request({
+      method: 'POST',
+      url: '/repair/removeimgs',
+      data: data });
+
+  },
+  removedetailimgs: function removedetailimgs(data) {
+    return _index.default.request({
+      method: 'POST',
+      url: '/repair/removedetailimgs',
+      data: data });
+
+  },
+  list: function list(data) {
+    return _index.default.request({
+      url: '/repair/list',
+      method: 'POST',
+      data: data });
+
+  },
+  myrepairlist: function myrepairlist(data) {
+    return _index.default.request({
+      url: '/repair/myrepairlist',
+      method: 'GET',
+      data: data });
+
+  },
+  mytasklist: function mytasklist(data) {
+    return _index.default.request({
+      url: '/repair/mytasklist',
+      method: 'GET',
+      data: data });
+
+  },
+  //维修记录
+  repairinfo_list: function repairinfo_list(data) {
+    return _index.default.request({
+      url: '/repair/repair_infolist',
+      method: 'POST',
+      data: data });
+
+  },
+  //获取报修详情
+  repairinfo: function repairinfo(data) {
+    return _index.default.request({
+      url: '/repair/find',
+      method: 'GET',
+      data: data });
+
+  },
+  repairimgs: function repairimgs(data) {
+    return _index.default.request({
+      url: '/repair/images',
+      method: 'GET',
+      data: data });
+
+  },
+  repairimg_uploadurl: _index.default.baseurl + '/repair/upload/repairimg',
+  repairdetail_uploadimgurl: _index.default.baseurl + '/repair/upload/detailimg' };exports.default = _default;
+
+/***/ }),
+
+/***/ 4:
+/*!***********************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/pages.json ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ 42:
 /*!******************************************************************************!*\
   !*** D:/workspace/repair_miniproject/repairmp/components/uni-icons/icons.js ***!
   \******************************************************************************/
@@ -9953,136 +9962,176 @@ var substr = 'ab'.substr(-1) === 'b'
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  "pulldown": "\uE588",
-  "refreshempty": "\uE461",
-  "back": "\uE471",
-  "forward": "\uE470",
-  "more": "\uE507",
-  "more-filled": "\uE537",
-  "scan": "\uE612",
-  "qq": "\uE264",
-  "weibo": "\uE260",
-  "weixin": "\uE261",
-  "pengyouquan": "\uE262",
-  "loop": "\uE565",
-  "refresh": "\uE407",
-  "refresh-filled": "\uE437",
-  "arrowthindown": "\uE585",
-  "arrowthinleft": "\uE586",
-  "arrowthinright": "\uE587",
-  "arrowthinup": "\uE584",
-  "undo-filled": "\uE7D6",
-  "undo": "\uE406",
-  "redo": "\uE405",
-  "redo-filled": "\uE7D9",
-  "bars": "\uE563",
-  "chatboxes": "\uE203",
-  "camera": "\uE301",
-  "chatboxes-filled": "\uE233",
-  "camera-filled": "\uE7EF",
-  "cart-filled": "\uE7F4",
-  "cart": "\uE7F5",
-  "checkbox-filled": "\uE442",
-  "checkbox": "\uE7FA",
-  "arrowleft": "\uE582",
-  "arrowdown": "\uE581",
-  "arrowright": "\uE583",
-  "smallcircle-filled": "\uE801",
-  "arrowup": "\uE580",
-  "circle": "\uE411",
-  "eye-filled": "\uE568",
-  "eye-slash-filled": "\uE822",
-  "eye-slash": "\uE823",
-  "eye": "\uE824",
-  "flag-filled": "\uE825",
-  "flag": "\uE508",
-  "gear-filled": "\uE532",
-  "reload": "\uE462",
-  "gear": "\uE502",
-  "hand-thumbsdown-filled": "\uE83B",
-  "hand-thumbsdown": "\uE83C",
-  "hand-thumbsup-filled": "\uE83D",
-  "heart-filled": "\uE83E",
-  "hand-thumbsup": "\uE83F",
-  "heart": "\uE840",
-  "home": "\uE500",
-  "info": "\uE504",
-  "home-filled": "\uE530",
-  "info-filled": "\uE534",
-  "circle-filled": "\uE441",
-  "chat-filled": "\uE847",
-  "chat": "\uE263",
-  "mail-open-filled": "\uE84D",
-  "email-filled": "\uE231",
-  "mail-open": "\uE84E",
-  "email": "\uE201",
-  "checkmarkempty": "\uE472",
-  "list": "\uE562",
-  "locked-filled": "\uE856",
-  "locked": "\uE506",
-  "map-filled": "\uE85C",
-  "map-pin": "\uE85E",
-  "map-pin-ellipse": "\uE864",
-  "map": "\uE364",
-  "minus-filled": "\uE440",
-  "mic-filled": "\uE332",
-  "minus": "\uE410",
-  "micoff": "\uE360",
-  "mic": "\uE302",
-  "clear": "\uE434",
-  "smallcircle": "\uE868",
-  "close": "\uE404",
-  "closeempty": "\uE460",
-  "paperclip": "\uE567",
-  "paperplane": "\uE503",
-  "paperplane-filled": "\uE86E",
-  "person-filled": "\uE131",
-  "contact-filled": "\uE130",
-  "person": "\uE101",
-  "contact": "\uE100",
-  "images-filled": "\uE87A",
-  "phone": "\uE200",
-  "images": "\uE87B",
-  "image": "\uE363",
-  "image-filled": "\uE877",
-  "location-filled": "\uE333",
-  "location": "\uE303",
-  "plus-filled": "\uE439",
-  "plus": "\uE409",
-  "plusempty": "\uE468",
-  "help-filled": "\uE535",
-  "help": "\uE505",
-  "navigate-filled": "\uE884",
-  "navigate": "\uE501",
-  "mic-slash-filled": "\uE892",
-  "search": "\uE466",
-  "settings": "\uE560",
-  "sound": "\uE590",
-  "sound-filled": "\uE8A1",
-  "spinner-cycle": "\uE465",
-  "download-filled": "\uE8A4",
-  "personadd-filled": "\uE132",
-  "videocam-filled": "\uE8AF",
-  "personadd": "\uE102",
-  "upload": "\uE402",
-  "upload-filled": "\uE8B1",
-  "starhalf": "\uE463",
-  "star-filled": "\uE438",
-  "star": "\uE408",
-  "trash": "\uE401",
-  "phone-filled": "\uE230",
-  "compose": "\uE400",
-  "videocam": "\uE300",
-  "trash-filled": "\uE8DC",
-  "download": "\uE403",
-  "chatbubble-filled": "\uE232",
-  "chatbubble": "\uE202",
-  "cloud-download": "\uE8E4",
-  "cloud-upload-filled": "\uE8E5",
-  "cloud-upload": "\uE8E6",
-  "cloud-download-filled": "\uE8E9",
-  "headphones": "\uE8BF",
-  "shop": "\uE609" };exports.default = _default;
+  'contact': "\uE100",
+  'person': "\uE101",
+  'personadd': "\uE102",
+  'contact-filled': "\uE130",
+  'person-filled': "\uE131",
+  'personadd-filled': "\uE132",
+  'phone': "\uE200",
+  'email': "\uE201",
+  'chatbubble': "\uE202",
+  'chatboxes': "\uE203",
+  'phone-filled': "\uE230",
+  'email-filled': "\uE231",
+  'chatbubble-filled': "\uE232",
+  'chatboxes-filled': "\uE233",
+  'weibo': "\uE260",
+  'weixin': "\uE261",
+  'pengyouquan': "\uE262",
+  'chat': "\uE263",
+  'qq': "\uE264",
+  'videocam': "\uE300",
+  'camera': "\uE301",
+  'mic': "\uE302",
+  'location': "\uE303",
+  'mic-filled': "\uE332",
+  'speech': "\uE332",
+  'location-filled': "\uE333",
+  'micoff': "\uE360",
+  'image': "\uE363",
+  'map': "\uE364",
+  'compose': "\uE400",
+  'trash': "\uE401",
+  'upload': "\uE402",
+  'download': "\uE403",
+  'close': "\uE404",
+  'redo': "\uE405",
+  'undo': "\uE406",
+  'refresh': "\uE407",
+  'star': "\uE408",
+  'plus': "\uE409",
+  'minus': "\uE410",
+  'circle': "\uE411",
+  'checkbox': "\uE411",
+  'close-filled': "\uE434",
+  'clear': "\uE434",
+  'refresh-filled': "\uE437",
+  'star-filled': "\uE438",
+  'plus-filled': "\uE439",
+  'minus-filled': "\uE440",
+  'circle-filled': "\uE441",
+  'checkbox-filled': "\uE442",
+  'closeempty': "\uE460",
+  'refreshempty': "\uE461",
+  'reload': "\uE462",
+  'starhalf': "\uE463",
+  'spinner': "\uE464",
+  'spinner-cycle': "\uE465",
+  'search': "\uE466",
+  'plusempty': "\uE468",
+  'forward': "\uE470",
+  'back': "\uE471",
+  'left-nav': "\uE471",
+  'checkmarkempty': "\uE472",
+  'home': "\uE500",
+  'navigate': "\uE501",
+  'gear': "\uE502",
+  'paperplane': "\uE503",
+  'info': "\uE504",
+  'help': "\uE505",
+  'locked': "\uE506",
+  'more': "\uE507",
+  'flag': "\uE508",
+  'home-filled': "\uE530",
+  'gear-filled': "\uE532",
+  'info-filled': "\uE534",
+  'help-filled': "\uE535",
+  'more-filled': "\uE537",
+  'settings': "\uE560",
+  'list': "\uE562",
+  'bars': "\uE563",
+  'loop': "\uE565",
+  'paperclip': "\uE567",
+  'eye': "\uE568",
+  'arrowup': "\uE580",
+  'arrowdown': "\uE581",
+  'arrowleft': "\uE582",
+  'arrowright': "\uE583",
+  'arrowthinup': "\uE584",
+  'arrowthindown': "\uE585",
+  'arrowthinleft': "\uE586",
+  'arrowthinright': "\uE587",
+  'pulldown': "\uE588",
+  'closefill': "\uE589",
+  'sound': "\uE590",
+  'scan': "\uE612" };exports.default = _default;
+
+/***/ }),
+
+/***/ 77:
+/*!******************************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/api/user/index.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../../utils/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+{
+  userinfo: function userinfo(data) {
+    return _index.default.request({
+      url: '/mp/userinfo',
+      method: 'GET',
+      data: data });
+
+  },
+  usermenus: function usermenus(data) {
+    return _index.default.request({
+      url: '/mp/menus',
+      method: 'GET',
+      data: data });
+
+  } };exports.default = _default;
+
+/***/ }),
+
+/***/ 94:
+/*!*********************************************************************!*\
+  !*** D:/workspace/repair_miniproject/repairmp/api/process/index.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../../utils/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+{
+  process_steps: function process_steps(data) {
+    return _index.default.request({
+      url: '/process/getsetps',
+      method: 'GET',
+      data: data });
+
+  },
+  bill_setp: function bill_setp(data) {
+    return _index.default.request({
+      url: '/process/billstep',
+      method: 'GET',
+      data: data });
+
+  },
+  bill_auditor: function bill_auditor(data) {
+    return _index.default.request({
+      url: '/process/stepusers',
+      method: 'GET',
+      data: data });
+
+  },
+  bill_next: function bill_next(data) {
+    return _index.default.request({
+      url: '/repair/nextsetp',
+      method: 'GET',
+      data: data });
+
+  },
+  disgreebill: function disgreebill(data) {
+    return _index.default.request({
+      url: '/repair/disgree',
+      method: 'GET',
+      data: data });
+
+  } };exports.default = _default;
 
 /***/ })
 
