@@ -1,0 +1,1 @@
+<view class="container data-v-4e8e5540"><view class="barhead data-v-4e8e5540"></view><view class="barcontent data-v-4e8e5540"><slot name="title"></slot></view></view>
