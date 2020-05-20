@@ -8,13 +8,6 @@ export default {
 			data:data
 		});
 	},
-	bill_setp:(data)=>{
-		return util.request({
-			url:'/process/billstep',
-			method:'GET',
-			data:data
-		});
-	},
 	bill_auditor:(data)=>{
 		return util.request({
 			url:'/process/stepusers',

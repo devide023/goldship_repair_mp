@@ -9937,6 +9937,27 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       data: data });
 
   },
+  repairusers: function repairusers(data) {
+    return _index.default.request({
+      url: '/repair/dealwithusers',
+      method: 'GET',
+      data: data });
+
+  },
+  sendbill: function sendbill(data) {
+    return _index.default.request({
+      url: '/repair/sendbill',
+      method: 'POST',
+      data: data });
+
+  },
+  billstepno: function billstepno(data) {
+    return _index.default.request({
+      url: '/repair/billstepno',
+      method: 'GET',
+      data: data });
+
+  },
   repairimg_uploadurl: _index.default.baseurl + '/repair/upload/repairimg',
   repairdetail_uploadimgurl: _index.default.baseurl + '/repair/upload/detailimg' };exports.default = _default;
 
@@ -10100,13 +10121,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   process_steps: function process_steps(data) {
     return _index.default.request({
       url: '/process/getsetps',
-      method: 'GET',
-      data: data });
-
-  },
-  bill_setp: function bill_setp(data) {
-    return _index.default.request({
-      url: '/process/billstep',
       method: 'GET',
       data: data });
 

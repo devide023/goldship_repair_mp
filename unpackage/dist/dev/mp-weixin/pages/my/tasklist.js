@@ -158,7 +158,7 @@ var repairitem = function repairitem() {__webpack_require__.e(/*! require.ensure
       list: [] };
 
   },
-  mounted: function mounted() {
+  onShow: function onShow() {
     this.getlist();
   },
   methods: {

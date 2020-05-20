@@ -77,10 +77,10 @@
 					});
 				},
 				get_current_setp(){
-					processfn.bill_setp({
+					RepairFn.billstepno({
 						billid:this.repairid
 					}).then(res=>{
-						this.active_stepno = res.data.result.stepinfo.currentstep;
+						this.active_stepno = res.data.stepinfo.currentstep-1;
 					});
 				},
 				setrepairinfo() {

@@ -26,7 +26,7 @@
 				list: []
 			}
 		},
-		mounted() {
+		onShow() {
 			this.getlist();
 		},
 		methods: {

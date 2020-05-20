@@ -86,6 +86,27 @@ export default{
 				data:data
 		});
 	},
+	repairusers:(data)=>{
+		return util.request({
+			url:'/repair/dealwithusers',
+			method:'GET',
+			data:data
+		});
+	},
+	sendbill:(data)=>{
+		return util.request({
+			url:'/repair/sendbill',
+			method:'POST',
+			data:data
+		});
+	},
+	billstepno:(data)=>{
+		return util.request({
+			url:'/repair/billstepno',
+			method:'GET',
+			data:data
+		});
+	},
 	repairimg_uploadurl:util.baseurl+'/repair/upload/repairimg',
 	repairdetail_uploadimgurl:util.baseurl+'/repair/upload/detailimg',
 }

@@ -216,10 +216,10 @@ var _index3 = _interopRequireDefault(__webpack_require__(/*! ../../utils/index.j
       });
     },
     get_current_setp: function get_current_setp() {var _this3 = this;
-      _index.default.bill_setp({
+      _index2.default.billstepno({
         billid: this.repairid }).
       then(function (res) {
-        _this3.active_stepno = res.data.result.stepinfo.currentstep;
+        _this3.active_stepno = res.data.stepinfo.currentstep - 1;
       });
     },
     setrepairinfo: function setrepairinfo() {

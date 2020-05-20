@@ -118,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 37));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -139,6 +139,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../api/repair/index.js */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniIcons = function uniIcons() {Promise.all(/*! require.ensure | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-icons/uni-icons.vue */ 37));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     "uni-icons": uniIcons },
@@ -151,7 +155,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       funlist: [],
-      user: {} };
+      user: {},
+      stepinfo: {} };
 
   },
   computed: {
@@ -160,6 +165,16 @@ __webpack_require__.r(__webpack_exports__);
         return i.funname.code === 'audit';
       });
       if (this.repairitem.status === '01' && funcode.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    ischeck: function ischeck() {
+      var funcode = this.funlist.filter(function (i) {
+        return i.funname.code === 'check';
+      });
+      if (this.repairitem.status === '02' && funcode.length > 0 && this.stepinfo.currentstep === this.stepinfo.totalstep && this.stepinfo.isover === 0) {
         return true;
       } else {
         return false;
@@ -189,14 +204,24 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var userinfo = uni.getStorageSync('userinfo');
     this.funlist = userinfo.funs;
+    this.getcurrentstepno();
   },
   methods: {
-
+    getcurrentstepno: function getcurrentstepno() {var _this = this;
+      _index.default.billstepno({ billid: this.repairitem.id }).then(function (res) {
+        console.log(res);
+        _this.stepinfo = res.stepinfo;
+      });
+    },
     audit_repairbill: function audit_repairbill() {
       this.$emit('audit', this.repairitem);
     },
     deal_repairbill: function deal_repairbill() {
       this.$emit('dealwith', this.repairitem);
+    },
+    check_repairbill: function check_repairbill()
+    {
+      this.$emit('check', this.repairitem);
     },
     send_repairbill: function send_repairbill() {
       this.$emit('sendbill', this.repairitem);

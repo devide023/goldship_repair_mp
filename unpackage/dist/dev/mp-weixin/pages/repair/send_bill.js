@@ -137,50 +137,84 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      dealusers: [],
-      dealindex: 0,
-      sendform: {},
-
-
-      rules: {
-        dealuser: {
-          required: true,
-          message: '请选择维修人员' } } };
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../api/repair/index.js */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { orginuser: [], dealusers: [], dealindex: 0, sendform: { billid: 0, dealuserid: 0, senduser: '', note: '' }, rules: { dealuser: { required: true, message: '请选择维修人员' } } };
+  },
+  onLoad: function onLoad(e) {
+    this.sendform.billid = parseInt(e.id);
   },
   mounted: function mounted() {
     this.$refs.form.setRules(this.rules);
+    this.getrepairuserlist();
+    this.init();
   },
   methods: {
+    getrepairuserlist: function getrepairuserlist() {var _this = this;
+      _index.default.repairusers().then(function (res) {
+        _this.orginuser = res.data.result;
+        _this.dealusers = res.data.result.map(function (i) {
+          return i.name;
+        });
+      });
+    },
+    init: function init() {
+      this.sendform.senduser = uni.getStorageSync('userinfo').name;
+    },
     selectdealuser: function selectdealuser(e) {
       console.log(e.target.value);
       this.dealindex = e.target.value;
+      this.sendform.dealuserid = this.orginuser[e.target.value].id;
     },
-    send_form: function send_form() {
+    send_form_data: function send_form_data() {
+      _index.default.sendbill(this.sendform).then(function (res) {
+        uni.showToast({
+          title: res.data.msg,
+          duration: 3000 });
 
+        if (res.data.code === 1) {
+          uni.navigateBack();
+        }
+      });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
