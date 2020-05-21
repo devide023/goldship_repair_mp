@@ -97,7 +97,7 @@
 				this.$emit('audit',this.repairitem);
 			},
 			deal_repairbill() {
-				this.$emit('dealwith', this.repairitem);
+				this.$emit('deal', this.repairitem);
 			},
 			check_repairbill()
 			{

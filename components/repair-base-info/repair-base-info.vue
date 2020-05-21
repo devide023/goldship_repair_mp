@@ -19,6 +19,14 @@
 			<view>报修人：{{repairentity.addusername.name}}</view>
 			<view>报修日期：{{repairentity.addtime}}</view>
 		</view>
+		<view class="itemrow last">
+			<view>派单人：{{repairentity.sendusername.name}}</view>
+			<view>派单日期：{{repairentity.sendtime}}</view>
+		</view>
+		<view class="itemrow last">
+			<view>验收人：{{repairentity.endusername.name}}</view>
+			<view>验收日期：{{repairentity.endtime}}</view>
+		</view>
 	</view>
 </template>
 

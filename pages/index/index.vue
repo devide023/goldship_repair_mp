@@ -1,10 +1,14 @@
 <template>
 	<view class="container">
 		<uni-grid :column="4" :showBorder="false" @change="selectitem">
-		    <uni-grid-item v-for="(item,index) in menulist" :index="index" :key="item.id">
-		        <uni-icons :type="item.icon" :size="item.size" :color="item.color"></uni-icons>
+			<uni-grid-item v-for="(item,index) in menulist" :index="index" :key="item.id">
+				<uni-icons :type="item.icon" :size="item.size" :color="item.color"></uni-icons>
 				<view :style="{color: item.color,fontSize: item.fontsize}">{{item.name}}</view>
-		    </uni-grid-item>
+			</uni-grid-item>
+			<uni-grid-item v-for="(item,index) in closemenu" :index="totalcnt-(index+1)" :key="item.id">
+				<uni-icons :type="item.icon" :size="item.size" :color="item.color"></uni-icons>
+				<navigator open-type="exit" target="miniProgram" :style="{color: item.color,fontSize: item.fontsize}">{{item.name}}</navigator>
+			</uni-grid-item>
 		</uni-grid>
 	</view>
 </template>
@@ -16,13 +20,15 @@
 	import uniIcons from "@/components/uni-icons/uni-icons.vue"
 	export default {
 		components: {
-			"uni-grid":uniGrid,
-			"uni-grid-item":uniGridItem,
-			"uni-icons":uniIcons
+			"uni-grid": uniGrid,
+			"uni-grid-item": uniGridItem,
+			"uni-icons": uniIcons
 		},
 		data() {
 			return {
-				menulist:[]
+				totalcnt: 0,
+				menulist: [],
+				closemenu: []
 			}
 		},
 		mounted() {
@@ -30,27 +36,41 @@
 		},
 		onLoad() {
 			UserFn.userinfo().then(res => {
-				uni.hideLoading();
-				let  result = res;
+				let result = res;
 				console.log(result);
 				if (result.data.code === 1) {
-					uni.setStorageSync('userinfo',result.data.result);
+					uni.setStorageSync('userinfo', result.data.result);
 				}
 			});
 		},
 		methods: {
-			getlist(){
-				UserFn.usermenus().then(res=>{
-					this.menulist = res.data.result;
+			getlist() {
+				UserFn.usermenus().then(res => {
+					this.totalcnt = res.data.result.length;
+					this.menulist = res.data.result.filter(function(i) {
+						return i.pagepath !== '#';
+					});
+					this.closemenu = res.data.result.filter(function(i) {
+						return i.pagepath === '#';
+					});
 				})
 			},
-			selectitem(e){
+			selectitem(e) {
 				const index = e.detail.index;
-				let path = this.menulist[index].pagepath;
-				console.log(path);
-				uni.navigateTo({
-					url:path
-				})
+				if (index !== this.totalcnt - 1) {
+					let path = this.menulist[index].pagepath;
+					console.log(path);
+					uni.navigateTo({
+						url: path
+					})
+				} else {
+					//退出
+					uni.clearStorageSync('userinfo');
+					uni.clearStorageSync('token');
+					uni.reLaunch({
+						url:'/pages/login/login'
+					});
+				}
 			}
 		}
 	}
@@ -62,7 +82,8 @@
 		padding: 0rpx 10rpx;
 		margin: 10rpx auto;
 	}
-	.uni-grid-item{
+
+	.uni-grid-item {
 		text-align: center;
 		align-items: center;
 	}

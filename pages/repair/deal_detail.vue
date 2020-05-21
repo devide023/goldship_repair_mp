@@ -26,6 +26,7 @@
 
 <script>
 	import RepairFn from '../../api/repair/index.js';
+	import ProcessFn from '../../api/process/index.js';
 	import tool from '../../utils/index.js'
 	export default {
 		data() {
@@ -54,7 +55,7 @@
 			this.inituserinfo();
 		},
 		onLoad(e) {
-			this.form.repairid = e.id;
+			this.form.repairid = parseInt(e.id);
 		},
 		methods: {
 			inituserinfo(){
@@ -131,7 +132,18 @@
 								duration:3000,
 							});
 							if(result.data.code === 1){
-								uni.navigateBack();
+								ProcessFn.bill_next({
+									billid:this.form.repairid
+								}).then(res=>{
+									uni.showToast({
+										title:res.data.msg,
+										duration:3000
+									});
+									if(res.data.code === 1){
+										uni.navigateBack();
+									}
+								})
+								
 							}
 						});
 					}

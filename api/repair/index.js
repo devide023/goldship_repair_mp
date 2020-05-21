@@ -49,6 +49,13 @@ export default{
 			data:data
 		});
 	},
+	orgrepairlist:(data)=>{
+		return util.request({
+			url:'/repair/orgrepairlist',
+			method:'GET',
+			data:data
+		});
+	},
 	myrepairlist:(data)=>{
 		return util.request({
 			url:'/repair/myrepairlist',
@@ -86,6 +93,7 @@ export default{
 				data:data
 		});
 	},
+	//维修人
 	repairusers:(data)=>{
 		return util.request({
 			url:'/repair/dealwithusers',
@@ -93,6 +101,7 @@ export default{
 			data:data
 		});
 	},
+	//派单
 	sendbill:(data)=>{
 		return util.request({
 			url:'/repair/sendbill',
@@ -100,9 +109,18 @@ export default{
 			data:data
 		});
 	},
+	//单据步骤
 	billstepno:(data)=>{
 		return util.request({
 			url:'/repair/billstepno',
+			method:'GET',
+			data:data
+		});
+	},
+	//验收
+	checkrepair:(data)=>{
+		return util.request({
+			url:'/repair/checkbill',
 			method:'GET',
 			data:data
 		});
