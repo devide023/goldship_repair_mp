@@ -36,10 +36,8 @@
 		},
 		onLoad() {
 			UserFn.userinfo().then(res => {
-				let result = res;
-				console.log(result);
-				if (result.data.code === 1) {
-					uni.setStorageSync('userinfo', result.data.result);
+				if (res.data.code === 1) {
+					uni.setStorageSync('userinfo', res.data.result);
 				}
 			});
 		},

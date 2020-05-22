@@ -54,7 +54,6 @@
 					let result = res;
 					this.msg = result.data.msg;
 					if (result.data.code === 1) {
-						uni.hideLoading();
 						uni.setStorage({
 							key: 'token',
 							data: result.data.token,

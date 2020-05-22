@@ -2,7 +2,8 @@
 	<view>
 		<repair-item v-for="item in list" :key="item.id" :repairitem="item">
 			<template #buttons>
-				<repair-btns :repairitem="item" @audit="audithandle" @sendbill="sendbillhandle" @deal="dealhandle" @check="checkhandle"></repair-btns>
+				<repair-btns :repairitem="item" @audit="audithandle" @sendbill="sendbillhandle" @deal="dealhandle" @dealover="dealoverhandle"
+				 @check="checkhandle"></repair-btns>
 			</template>
 		</repair-item>
 		<uni-load-more :status="more"></uni-load-more>
@@ -23,7 +24,7 @@
 		},
 		data() {
 			return {
-				more:'',
+				more: 'nomore',
 				form: {
 					page: 1,
 					pagesize: 15,
@@ -106,16 +107,47 @@
 					url: '/pages/repair/deal_detail?id=' + repairitem.id
 				})
 			},
+			dealoverhandle(repairitem) {
+				const that = this;
+				uni.showModal({
+					title: '提示',
+					content: '你确定要完工该任务?',
+					success(result) {
+						if (result.confirm) {
+							RepairFn.dealoverbill({
+								billid:repairitem.id
+							}).then(res=>{
+								uni.showToast({
+									title:res.data.msg,
+									duration:3000
+								});
+								if(res.data.code === 1){
+									that.getlist();
+								}
+							});
+						}
+					}
+				})
+			},
 			checkhandle(repairitem) {
-				RepairFn.checkrepair({
-					billid: repairitem.id
-				}).then(res => {
-					uni.showToast({
-						title: res.data.msg,
-						duration: 3000
-					});
-					if (res.data.code === 1) {
-						this.getlist();
+				const that = this;
+				uni.showModal({
+					title:'提示',
+					content:'你确定要验收该项目?',
+					success(result) {
+						if (result.confirm){
+							RepairFn.checkrepair({
+								billid: repairitem.id
+							}).then(res => {
+								uni.showToast({
+									title: res.data.msg,
+									duration: 3000
+								});
+								if (res.data.code === 1) {
+									that.getlist();
+								}
+							});
+						}
 					}
 				});
 			}

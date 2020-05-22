@@ -125,14 +125,14 @@
 			submit_form(){
 				this.$refs.form.validate((v) => {
 					if (v) {
-						RepairFn.addrepair_detail(this.form).then(res=>{
-							let result = res;
+						RepairFn.addrepair_detail(this.form).then(result=>{
 							uni.showToast({
 								title:result.data.msg,
 								duration:3000,
 							});
 							if(result.data.code === 1){
-								ProcessFn.bill_next({
+								uni.navigateBack();
+								/*ProcessFn.bill_next({
 									billid:this.form.repairid
 								}).then(res=>{
 									uni.showToast({
@@ -142,8 +142,8 @@
 									if(res.data.code === 1){
 										uni.navigateBack();
 									}
-								})
-								
+								});
+								*/
 							}
 						});
 					}

@@ -7,6 +7,9 @@
 			<view class="btnitem" v-if="isdeal" @click="deal_repairbill">
 				<uni-icons type="compose" color="#007AFF"></uni-icons>处理
 			</view>
+			<view class="btnitem" v-if="isdealover" @click="dealover_repairbill">
+				<uni-icons type="checkmarkempty" color="#007AFF"></uni-icons>完工
+			</view>
 			<view class="btnitem" v-if="ischeck" @click="check_repairbill">
 				<uni-icons type="checkbox" color="#007AFF"></uni-icons>验收
 			</view>
@@ -64,7 +67,17 @@
 				const funcode = this.funlist.filter(function(i){
 					return i.funname.code === 'dealwith';
 				});
-				if (this.repairitem.status === '01' && funcode.length>0) {
+				if (this.repairitem.status === '02' && funcode.length>0) {
+					return true;
+				}else{
+					return false;
+				}
+			},
+			isdealover(){
+				const funcode = this.funlist.filter(function(i){
+					return i.funname.code === 'dealover';
+				});
+				if (this.repairitem.status === '02' && funcode.length>0) {
 					return true;
 				}else{
 					return false;
@@ -98,6 +111,9 @@
 			},
 			deal_repairbill() {
 				this.$emit('deal', this.repairitem);
+			},
+			dealover_repairbill(){
+				this.$emit('dealover', this.repairitem);
 			},
 			check_repairbill()
 			{

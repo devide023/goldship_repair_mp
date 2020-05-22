@@ -22,7 +22,7 @@
 		},
 		data() {
 			return {
-				more: '',
+				more: 'nomore',
 				list: [],
 				queryform: {
 					page: 1,

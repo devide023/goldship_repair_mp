@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "我的任务",
-  "usingComponents": {
-    "repair-item": "/components/repair-item/repairitem",
-    "repair-btns": "/components/repair-button/repair-button"
-  }
-}

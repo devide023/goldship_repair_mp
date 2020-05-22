@@ -1,1 +1,0 @@
-<view class="data-v-e66c4ec0"><scroll-view class="images data-v-e66c4ec0" scroll-x="true"><block wx:for="{{imglist}}" wx:for-item="item" wx:for-index="index" wx:key="index"><image class="imgitem data-v-e66c4ec0" src="{{item}}" mode="aspectFit" data-event-opts="{{[['tap',[['previewimgs',['$0'],[[['imglist','',index]]]]]]]}}" bindtap="__e"></image></block></scroll-view></view>

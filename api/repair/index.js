@@ -78,6 +78,13 @@ export default{
 			data:data
 		});
 	},
+	dealoverbill:(data)=>{
+		return util.request({
+			url:'/repair/dealovertask',
+			method:'POST',
+			data:data
+		});
+	},
 	//获取报修详情
 	repairinfo:(data)=>{
 		return util.request({

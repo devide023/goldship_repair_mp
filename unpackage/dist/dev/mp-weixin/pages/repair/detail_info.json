@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "维修记录",
-  "usingComponents": {
-    "deal-item": "/components/repair-detail-item/dealitem"
-  }
-}

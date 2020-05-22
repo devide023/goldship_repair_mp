@@ -1,1 +1,0 @@
-<view class="container"><block wx:for="{{list}}" wx:for-item="item" wx:for-index="__i0__" wx:key="id"><deal-item vue-id="{{'4452f05a-1-'+__i0__}}" detailitem="{{item}}" bind:__l="__l"></deal-item></block></view>
