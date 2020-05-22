@@ -2,7 +2,7 @@
 	<view>
 		<repair-item v-for="item in list" :key="item.id" :repairitem="item">
 			<template #buttons>
-				<repair-btns :repairid="item.id" :status="item.status" @audit="audithandle(item.id)" @send="sendbillhandle(item.id)" @deal="dealhandle(item.id)"
+				<repair-btns :repairid="item.id" :status="item.status" @audit="audithandle(item.id)" @sendbill="sendbillhandle(item.id)" @deal="dealhandle(item.id)"
 				 @dealover="dealoverhandle(item.id)" @check="checkhandle(item.id)" @viewdetail="viewdetailhandle(item.id)"></repair-btns>
 			</template>
 		</repair-item>
