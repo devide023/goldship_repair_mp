@@ -1,9 +1,9 @@
 {
-    "name" : "repairmp",
+    "name" : "邮轮报修管理",
     "appid" : "__UNI__9FAF32B",
-    "description" : "黄金邮轮报修",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "description" : "黄金邮轮报修管理",
+    "versionName" : "2.0.0.0",
+    "versionCode" : 101,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -50,10 +50,22 @@
             /* ios打包配置 */
             "ios" : {},
             /* SDK配置 */
-            "sdkConfigs" : {},
+            "sdkConfigs" : {
+                "ad" : {}
+            },
             "icons" : {
                 "android" : {
-                    "hdpi" : "C:/Users/Administrator/Desktop/gold_logo.png"
+                    "hdpi" : "C:/Users/Administrator/Desktop/gold_logo.png",
+                    "xhdpi" : "C:/Users/Administrator/Desktop/gold_logo.png",
+                    "xxhdpi" : "C:/Users/Administrator/Desktop/gold_logo.png",
+                    "xxxhdpi" : "C:/Users/Administrator/Desktop/gold_logo.png"
+                }
+            },
+            "splashscreen" : {
+                "android" : {
+                    "hdpi" : "C:/Users/Administrator/Desktop/loading.png",
+                    "xhdpi" : "C:/Users/Administrator/Desktop/loading.png",
+                    "xxhdpi" : "C:/Users/Administrator/Desktop/loading.png"
                 }
             }
         }
@@ -64,7 +76,10 @@
     "mp-weixin" : {
         "appid" : "wxce873f47ec3fabfd",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "postcss" : true,
+            "es6" : true,
+            "minified" : true
         },
         "usingComponents" : true
     },

@@ -60,6 +60,7 @@
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content: space-between;
+		font-size: 10px;
 	}
 
 	.status {

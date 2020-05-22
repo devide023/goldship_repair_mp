@@ -2,8 +2,8 @@
 	<view>
 		<repair-item v-for="item in list" :key="item.id" :repairitem="item">
 			<template #buttons>
-				<repair-btns :repairitem="item" @audit="audithandle" @sendbill="sendbillhandle" @deal="dealhandle" @dealover="dealoverhandle"
-				 @check="checkhandle"></repair-btns>
+				<repair-btns :repairid="item.id" :status="item.status" @audit="audithandle(item.id)" @send="sendbillhandle(item.id)" @deal="dealhandle(item.id)"
+				 @dealover="dealoverhandle(item.id)" @check="checkhandle(item.id)" @viewdetail="viewdetailhandle(item.id)"></repair-btns>
 			</template>
 		</repair-item>
 		<uni-load-more :status="more"></uni-load-more>
@@ -24,7 +24,7 @@
 		},
 		data() {
 			return {
-				more: 'nomore',
+				more: 'loading',
 				form: {
 					page: 1,
 					pagesize: 15,
@@ -44,12 +44,13 @@
 					this.form.page = 1;
 					this.total = res.data.result.total;
 					this.lastpage = res.data.result.last_page;
+					this.more = 'nomore';
 				});
 			},
-			agree(repairitem) {
+			agree(id) {
 				const that = this;
 				ProcessFn.bill_next({
-					billid: repairitem.id
+					billid: id
 				}).then(res => {
 					uni.showToast({
 						title: res.data.msg
@@ -59,10 +60,10 @@
 					}
 				});
 			},
-			disgree(repairitem) {
+			disgree(id) {
 				const that = this;
 				ProcessFn.disgreebill({
-					billid: repairitem.id
+					billid: id
 				}).then(res => {
 					uni.showToast({
 						title: res.data.msg
@@ -72,7 +73,7 @@
 					}
 				});
 			},
-			audithandle(repairitem) {
+			audithandle(id) {
 				const that = this;
 				uni.showActionSheet({
 					itemList: [
@@ -83,10 +84,10 @@
 						const index = res.tapIndex;
 						switch (index) {
 							case 0:
-								that.agree(repairitem);
+								that.agree(id);
 								break;
 							case 1:
-								that.disgree(repairitem);
+								that.disgree(id);
 								break;
 							default:
 								break;
@@ -97,17 +98,17 @@
 					}
 				});
 			},
-			sendbillhandle(repairitem) {
+			sendbillhandle(id) {
 				uni.navigateTo({
-					url: '/pages/repair/send_bill?id=' + repairitem.id
+					url: '/pages/repair/send_bill?id=' + id
 				});
 			},
-			dealhandle(repairitem) {
+			dealhandle(id) {
 				uni.navigateTo({
-					url: '/pages/repair/deal_detail?id=' + repairitem.id
+					url: '/pages/repair/deal_detail?id=' + id
 				})
 			},
-			dealoverhandle(repairitem) {
+			dealoverhandle(id) {
 				const that = this;
 				uni.showModal({
 					title: '提示',
@@ -115,29 +116,7 @@
 					success(result) {
 						if (result.confirm) {
 							RepairFn.dealoverbill({
-								billid:repairitem.id
-							}).then(res=>{
-								uni.showToast({
-									title:res.data.msg,
-									duration:3000
-								});
-								if(res.data.code === 1){
-									that.getlist();
-								}
-							});
-						}
-					}
-				})
-			},
-			checkhandle(repairitem) {
-				const that = this;
-				uni.showModal({
-					title:'提示',
-					content:'你确定要验收该项目?',
-					success(result) {
-						if (result.confirm){
-							RepairFn.checkrepair({
-								billid: repairitem.id
+								billid: id
 							}).then(res => {
 								uni.showToast({
 									title: res.data.msg,
@@ -149,6 +128,33 @@
 							});
 						}
 					}
+				});
+			},
+			checkhandle(id) {
+				const that = this;
+				uni.showModal({
+					title: '提示',
+					content: '你确定要验收该项目?',
+					success(result) {
+						if (result.confirm) {
+							RepairFn.checkrepair({
+								billid: id
+							}).then(res => {
+								uni.showToast({
+									title: res.data.msg,
+									duration: 3000
+								});
+								if (res.data.code === 1) {
+									that.getlist();
+								}
+							});
+						}
+					}
+				});
+			},
+			viewdetailhandle(id) {
+				uni.navigateTo({
+					url: '/pages/repair/repair_detail?id=' + id
 				});
 			}
 		},

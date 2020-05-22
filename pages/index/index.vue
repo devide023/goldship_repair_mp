@@ -10,6 +10,11 @@
 				<navigator open-type="exit" target="miniProgram" :style="{color: item.color,fontSize: item.fontsize}">{{item.name}}</navigator>
 			</uni-grid-item>
 		</uni-grid>
+
+		<view class="nomenus" v-if="totalcnt===0">
+			<text>{{tip}}</text>
+		</view>
+
 	</view>
 </template>
 
@@ -26,6 +31,7 @@
 		},
 		data() {
 			return {
+				tip:'',
 				totalcnt: 0,
 				menulist: [],
 				closemenu: []
@@ -45,6 +51,9 @@
 			getlist() {
 				UserFn.usermenus().then(res => {
 					this.totalcnt = res.data.result.length;
+					if(this.totalcnt === 0){
+						this.tip='登录用户暂未分配菜单，请联系管理员开通';
+					}
 					this.menulist = res.data.result.filter(function(i) {
 						return i.pagepath !== '#';
 					});
@@ -66,7 +75,7 @@
 					uni.clearStorageSync('userinfo');
 					uni.clearStorageSync('token');
 					uni.reLaunch({
-						url:'/pages/login/login'
+						url: '/pages/login/login'
 					});
 				}
 			}
@@ -76,7 +85,6 @@
 
 <style>
 	.container {
-		width: 100%;
 		padding: 0rpx 10rpx;
 		margin: 10rpx auto;
 	}
@@ -84,5 +92,12 @@
 	.uni-grid-item {
 		text-align: center;
 		align-items: center;
+	}
+
+	.nomenus {
+		color: #ff0206;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
 	}
 </style>

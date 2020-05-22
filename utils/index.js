@@ -1,8 +1,9 @@
-const baseurl = 'http://192.168.20.72:8081/api';
-const rooturl = 'http://192.168.20.72:8081/';
+const url = 'http://192.168.20.72:8081';
+const baseurl = url + '/api';
+const rooturl = url + '/';
 export default {
 	baseurl: baseurl,
-	rooturl:rooturl,
+	rooturl: rooturl,
 	request: (option) => {
 		const token = uni.getStorageSync('token');
 		let requestheader = {};
@@ -17,24 +18,24 @@ export default {
 				"Authorization": "Bearer "
 			};
 		}
-		return new Promise((resolve, reject)=>{
+		return new Promise((resolve, reject) => {
 			uni.showLoading({
-			    title: '加载中'
+				title: '加载中'
 			});
 			uni.request({
 				url: baseurl + option.url,
-				method: option.method||'GET',
-				data: option.data||{},
+				method: option.method || 'GET',
+				data: option.data || {},
 				header: requestheader,
-				success:(res)=>{
+				success: (res) => {
 					uni.hideLoading();
 					resolve(res);
 				},
-				fail:(error)=>{
+				fail: (error) => {
 					console.log(error);
 					uni.showToast({
-						title:'网络请求失败',
-						duration:3000
+						title: '网络请求失败',
+						duration: 3000
 					})
 					reject();
 				}

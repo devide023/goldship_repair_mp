@@ -31,8 +31,11 @@
 			"uni-icons": uniIcons
 		},
 		props: {
-			repairitem: {
-				type: Object
+			repairid: {
+				type: Number
+			},
+			status:{
+				type:String
 			}
 		},
 		data() {
@@ -47,7 +50,7 @@
 				const funcode = this.funlist.filter(function(i){
 					return i.funname.code === 'audit';
 				});
-				if (this.repairitem.status === '01' && funcode.length>0) {
+				if (this.status === '01' && funcode.length>0) {
 					return true;
 				}else{
 					return false;
@@ -57,7 +60,7 @@
 				const funcode = this.funlist.filter(function(i){
 					return i.funname.code === 'check';
 				});
-				if (this.repairitem.status === '02' && funcode.length>0 && this.stepinfo.currentstep === this.stepinfo.totalstep && this.stepinfo.isover === 0 ) {
+				if (this.status === '02' && funcode.length>0 && this.stepinfo.currentstep === this.stepinfo.totalstep && this.stepinfo.isover === 0 ) {
 					return true;
 				}else{
 					return false;
@@ -67,7 +70,7 @@
 				const funcode = this.funlist.filter(function(i){
 					return i.funname.code === 'dealwith';
 				});
-				if (this.repairitem.status === '02' && funcode.length>0) {
+				if (this.status === '02' && funcode.length>0) {
 					return true;
 				}else{
 					return false;
@@ -77,7 +80,7 @@
 				const funcode = this.funlist.filter(function(i){
 					return i.funname.code === 'dealover';
 				});
-				if (this.repairitem.status === '02' && funcode.length>0) {
+				if (this.status === '02' && funcode.length>0) {
 					return true;
 				}else{
 					return false;
@@ -87,7 +90,7 @@
 				const funcode = this.funlist.filter(function(i){
 					return i.funname.code === 'sendbill';
 				});
-				if (this.repairitem.status === '01' && funcode.length>0) {
+				if (this.status === '01' && funcode.length>0) {
 					return true;
 				}else{
 					return false;
@@ -101,32 +104,29 @@
 		},
 		methods: {
 			getcurrentstepno(){
-				repairfn.billstepno({billid:this.repairitem.id}).then(res=>{
+				repairfn.billstepno({billid:this.repairid}).then(res=>{
 					console.log(res);
 					this.stepinfo = res.data.stepinfo;
 				});
 			},
 			audit_repairbill(){
-				this.$emit('audit',this.repairitem);
+				this.$emit('audit');
 			},
 			deal_repairbill() {
-				this.$emit('deal', this.repairitem);
+				this.$emit('deal');
 			},
 			dealover_repairbill(){
-				this.$emit('dealover', this.repairitem);
+				this.$emit('dealover');
 			},
 			check_repairbill()
 			{
-				this.$emit('check',this.repairitem);
+				this.$emit('check');
 			},
 			send_repairbill() {
-				this.$emit('sendbill', this.repairitem);
+				this.$emit('sendbill');
 			},
 			view_repair_detail() {
-				console.log(this.repairitem);
-				uni.navigateTo({
-					url:'/pages/repair/repair_detail?id='+this.repairitem.id
-				})
+				this.$emit('viewdetail');
 			}
 		}
 	}

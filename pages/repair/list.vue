@@ -2,9 +2,7 @@
 	<view>
 		<repair-item v-for="item in list" :key="item.id" :repairitem="item">
 			<template #buttons>
-				<view class="btnitem" @click="view_repair_detail(item.id)">
-					<uni-icons type="info" color="#007AFF"></uni-icons>详情
-				</view>
+				<view-detail :repairid="item.id"></view-detail>
 			</template>
 		</repair-item>
 		<uni-load-more :status="more"></uni-load-more>
@@ -15,14 +13,16 @@
 	import RepairItem from '../../components/repair-item/repairitem.vue'
 	import uniLoadMore from "../../components/uni-load-more/uni-load-more.vue"
 	import RepairFn from '../../api/repair/index.js'
+	import viewdetail from '../../components/view-detail/view-detail.vue'
 	export default {
 		components: {
 			'repair-item': RepairItem,
-			'uni-load-more': uniLoadMore
+			'uni-load-more': uniLoadMore,
+			'view-detail':viewdetail
 		},
 		data() {
 			return {
-				more: 'nomore',
+				more: 'loading',
 				list: [],
 				queryform: {
 					page: 1,
@@ -42,11 +42,7 @@
 					this.list = res.data.result.data;
 					this.total = res.data.result.total;
 					this.lastpage = res.data.result.last_page;
-				});
-			},
-			view_repair_detail(billid){
-				uni.navigateTo({
-					url:'/pages/repair/repair_detail?id='+billid
+					this.more='nomore';
 				});
 			}
 		},
@@ -83,9 +79,4 @@
 		flex-wrap: nowrap;
 	}*/
 	
-	.btnitem {
-		font-size: 13px;
-		color: #007AFF;
-		text-align: center;
-	}
 </style>

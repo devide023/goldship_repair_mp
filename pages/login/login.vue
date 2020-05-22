@@ -37,8 +37,8 @@
 				msg: '',
 				msgtype: 'success',
 				form: {
-					username: '0001',
-					password: '123456'
+					username: '',
+					password: ''
 				},
 				imgInfo: {
 					head: isUni ? '/static/gold_logo.png' : require('./images/head.png'),

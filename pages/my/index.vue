@@ -2,9 +2,7 @@
 	<view>
 		<repair-item v-for="item in list" :repairitem="item" :key="item.id">
 			<template #buttons>
-				<view class="btnitem" @click="view_repair_detail(item.id)">
-					<uni-icons type="info" color="#007AFF"></uni-icons>详情
-				</view>
+				<view-detail :repairid="item.id"></view-detail>
 			</template>
 		</repair-item>
 		<uni-load-more :status="more"></uni-load-more>
@@ -15,19 +13,21 @@
 	import RepairFn from '../../api/repair/index.js'
 	import repairitem from '../../components/repair-item/repairitem.vue'
 	import uniLoadMore from "../../components/uni-load-more/uni-load-more.vue"
+	import viewdetail from '../../components/view-detail/view-detail.vue'
 	export default {
 		components: {
-			'repair-item':repairitem,
-			"uni-load-more":uniLoadMore
+			'repair-item': repairitem,
+			"uni-load-more": uniLoadMore,
+			"view-detail":viewdetail
 		},
 		data() {
 			return {
-				more:'',
-				queryform:{
-					page:1,
-					pagesize:15
+				more: 'loading',
+				queryform: {
+					page: 1,
+					pagesize: 15
 				},
-				list:[],
+				list: [],
 				total: 0,
 				lastpage: 0
 			}
@@ -36,22 +36,18 @@
 			this.getlist();
 		},
 		methods: {
-			getlist(){
-				RepairFn.myrepairlist(this.queryform).then(res=>{
+			getlist() {
+				RepairFn.myrepairlist(this.queryform).then(res => {
 					this.queryform.page = 1;
 					this.list = res.data.result.data;
 					this.total = res.data.result.total;
 					this.lastpage = res.data.result.last_page;
+					this.more = 'nomore';
 				})
-			},
-			view_repair_detail(billid){
-				uni.navigateTo({
-					url:'/pages/repair/repair_detail?id='+billid
-				});
 			}
 		},
 		onPullDownRefresh() {
-			this.queryform.page=1;
+			this.queryform.page = 1;
 			this.getlist();
 		},
 		onReachBottom() {
@@ -72,12 +68,7 @@
 </script>
 
 <style>
-	page{
+	page {
 		background-color: #f3f3f3;
-	}
-	.btnitem {
-		font-size: 13px;
-		color: #007AFF;
-		text-align: center;
 	}
 </style>
