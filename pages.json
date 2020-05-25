@@ -73,7 +73,11 @@
 			}
 		}
 
-	],
+	    ,{
+            "path" : "pages/my/my",
+            "style" : {}
+        }
+    ],
 
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

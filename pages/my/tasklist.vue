@@ -15,7 +15,7 @@
 	import ProcessFn from '../../api/process/index.js';
 	import repairitem from '../../components/repair-item/repairitem.vue';
 	import repairbtns from '../../components/repair-button/repair-button.vue';
-	import uniLoadMore from "../../components/uni-load-more/uni-load-more.vue"
+	import uniLoadMore from "../../components/uni-load-more/uni-load-more.vue";
 	export default {
 		components: {
 			"repair-item": repairitem,
@@ -34,7 +34,7 @@
 				lastpage: 0
 			}
 		},
-		onShow() {
+		onLoad() {
 			this.getlist();
 		},
 		methods: {
@@ -45,6 +45,7 @@
 					this.total = res.data.result.total;
 					this.lastpage = res.data.result.last_page;
 					this.more = 'nomore';
+					uni.stopPullDownRefresh();
 				});
 			},
 			agree(id) {
