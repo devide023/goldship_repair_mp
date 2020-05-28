@@ -43,6 +43,7 @@
 					this.total = res.data.result.total;
 					this.lastpage = res.data.result.last_page;
 					this.more = 'nomore';
+					uni.stopPullDownRefresh();
 				})
 			}
 		},

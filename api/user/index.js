@@ -13,5 +13,19 @@ export default {
 			method:'GET',
 			data:data
 		});
+	},
+	chpwd:(data)=>{
+		return util.request({
+			url:'/user/chpwd',
+			method:'POST',
+			data:data
+		});
+	},
+	chinfo:(data)=>{
+		return util.request({
+			url:'/user/updateinfo',
+			method:'POST',
+			data:data
+		});
 	}
 }

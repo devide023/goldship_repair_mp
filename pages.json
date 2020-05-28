@@ -77,6 +77,14 @@
             "path" : "pages/my/my",
             "style" : {}
         }
+        ,{
+            "path" : "pages/my/changepwd",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/my/edituser",
+            "style" : {}
+        }
     ],
 
 	"globalStyle": {
@@ -87,7 +95,12 @@
 	},
 	"condition": {
 		"current": 0,
-		"list": [{
+		"list": [
+			{
+				"name":"myindex",
+				"path":"pages/my/my"
+			},
+			{
 			"name": "detail",
 			"path": "pages/repair/detail_info",
 			"query": "id=17"

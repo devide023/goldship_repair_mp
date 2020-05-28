@@ -99,7 +99,7 @@
 		},
 		mounted() {
 			const userinfo = uni.getStorageSync('userinfo');
-			this.funlist = userinfo.funs;
+			this.funlist = userinfo.mpfuns;
 			this.getcurrentstepno();
 		},
 		methods: {
