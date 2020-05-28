@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="header" :style="{background: 'url('+bjimgurl+');'}">
+		<view class="header" :style="{background: 'url('+bjimgurl+');backgroundImage: url('+bjimgurl+');'}">
 			<image class="headimg" :src="headimgurl" mode="scaleToFill" @tap="change_headimg_handle"></image>
 			<text class="username">{{userinfo.name}}</text>
 		</view>
