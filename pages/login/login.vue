@@ -21,7 +21,7 @@
 				<view class="img">
 					<image style="width:20px;height: 25px;" :src="imgInfo.icon_pwd" />
 				</view>
-				<input type="password" v-model="form.password" placeholder="请输入密码">
+				<input type="text" :password="true" v-model="form.password" placeholder="请输入密码">
 			</view>
 		</view>
 		<!-- 登录提交 -->

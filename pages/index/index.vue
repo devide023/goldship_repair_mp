@@ -52,6 +52,9 @@
 				}
 			});
 		},
+		onPullDownRefresh() {
+			this.getlist();
+		},
 		methods: {
 			getlist() {
 				UserFn.usermenus().then(res => {
@@ -65,7 +68,8 @@
 					this.closemenu = res.data.result.filter(function(i) {
 						return i.pagepath === '#';
 					});
-				})
+					uni.stopPullDownRefresh();
+				});
 			},
 			selectitem(e) {
 				const index = e.detail.index;
@@ -107,7 +111,7 @@
 	}
 	.grid-dot {
 		position: absolute;
-		top: 5px;
+		top: 0px;
 		right: 15px;
 	}
 </style>

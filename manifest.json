@@ -2,8 +2,8 @@
     "name" : "邮轮报修管理",
     "appid" : "__UNI__9FAF32B",
     "description" : "黄金邮轮报修管理",
-    "versionName" : "2.0.0.2",
-    "versionCode" : 103,
+    "versionName" : "2.0.0.3",
+    "versionCode" : 104,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
