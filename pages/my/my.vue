@@ -33,9 +33,9 @@
 				<view class="label">联系电话：</view>
 				<view class="value">{{userinfo.tel}}</view>
 			</view>
-			<view class="useritem">
+			<view class="useritem" style="height: 150rpx;line-height: 150rpx;">
 				<view class="label">联系地址：</view>
-				<view class="value">{{userinfo.provincename.name+userinfo.cityname.name+userinfo.districtname.name + userinfo.adress}}</view>
+				<view class="value" style="height: 60rpx;line-height: 60rpx;">{{userinfo.provincename.name+userinfo.cityname.name+userinfo.districtname.name + '\r\n' + userinfo.adress}}</view>
 			</view>
 		</view>
 		<view class="userbtnbar">
