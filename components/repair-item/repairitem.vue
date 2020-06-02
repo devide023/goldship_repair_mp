@@ -12,7 +12,7 @@
 
 				<view class="title">{{repairitem.title}}</view>
 				<view class="describe">{{repairitem.content}}</view>
-
+				<view class="note" v-if="showsendnote">{{repairitem.sendnote}}</view>
 				<previewimg :imglist="imglist" v-if="imglist.length>0"></previewimg>
 
 				<view class="usercontainer">
@@ -48,6 +48,20 @@
 				return this.repairitem.images.map(function(i) {
 					return that.repairimgurl + i.filename;
 				})
+			},
+			showsendnote(){
+				if(this.userinfo.mpfuns){
+					const funs = this.userinfo.mpfuns.filter(function(i){
+						return i.funname.code === 'dealwith'
+					});
+					if(funs.length>0){
+						return true;
+					}else{
+						return false;
+					}
+				}else{
+					return false;
+				}
 			}
 		},
 		mounted() {
@@ -149,7 +163,13 @@
 		padding-right: 10rpx;
 		margin-bottom: 20rpx;
 	}
-
+	.note{
+		font-size: 14px;
+		color: #ff0000;
+		font-weight: bold;
+		padding-right: 10rpx;
+		margin-bottom: 20rpx;
+	}
 	.usercontainer {
 		display: flex;
 		flex-direction: row;

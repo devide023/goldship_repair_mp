@@ -13,6 +13,9 @@
 			<view class="btnitem" v-if="ischeck" @click="check_repairbill">
 				<uni-icons type="checkbox" color="#007AFF"></uni-icons>验收
 			</view>
+			<view class="btnitem" v-if="isdoublecheck" @click="doublecheck_repairbill">
+				<uni-icons type="checkbox" color="#007AFF"></uni-icons>确认验收
+			</view>
 			<view class="btnitem" v-if="issend" @click="send_repairbill">
 				<uni-icons type="paperplane" color="#007AFF"></uni-icons>派单
 			</view>
@@ -57,6 +60,16 @@
 				}
 			},
 			ischeck(){
+				const funcode = this.funlist.filter(function(i){
+					return i.funname.code === 'check';
+				});
+				if (this.status === '02' && funcode.length>0 && this.stepinfo.currentstep !== this.stepinfo.totalstep && this.stepinfo.isover === 0 ) {
+					return true;
+				}else{
+					return false;
+				}
+			},
+			isdoublecheck(){
 				const funcode = this.funlist.filter(function(i){
 					return i.funname.code === 'check';
 				});
@@ -105,7 +118,6 @@
 		methods: {
 			getcurrentstepno(){
 				repairfn.billstepno({billid:this.repairid}).then(res=>{
-					console.log(res);
 					this.stepinfo = res.data.stepinfo;
 				});
 			},
@@ -121,6 +133,9 @@
 			check_repairbill()
 			{
 				this.$emit('check');
+			},
+			doublecheck_repairbill(){
+				this.$emit('doublecheck');
 			},
 			send_repairbill() {
 				this.$emit('sendbill');

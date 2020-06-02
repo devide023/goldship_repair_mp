@@ -3,7 +3,7 @@
 		<repair-item v-for="item in list" :key="item.id" :repairitem="item">
 			<template #buttons>
 				<repair-btns :repairid="item.id" :status="item.status" @audit="audithandle(item.id)" @sendbill="sendbillhandle(item.id)" @deal="dealhandle(item.id)"
-				 @dealover="dealoverhandle(item.id)" @check="checkhandle(item.id)" @viewdetail="viewdetailhandle(item.id)"></repair-btns>
+				 @dealover="dealoverhandle(item.id)" @check="checkhandle(item.id)" @doublecheck="doublecheckhandle(item.id)" @viewdetail="viewdetailhandle(item.id)"></repair-btns>
 			</template>
 		</repair-item>
 		<uni-load-more :status="more"></uni-load-more>
@@ -131,7 +131,7 @@
 					}
 				});
 			},
-			checkhandle(id) {
+			doublecheckhandle(id) {
 				const that = this;
 				uni.showModal({
 					title: '提示',
@@ -139,6 +139,28 @@
 					success(result) {
 						if (result.confirm) {
 							RepairFn.checkrepair({
+								billid: id
+							}).then(res => {
+								uni.showToast({
+									title: res.data.msg,
+									duration: 3000
+								});
+								if (res.data.code === 1) {
+									that.getlist();
+								}
+							});
+						}
+					}
+				});
+			},
+			checkhandle(id){
+				const that = this;
+				uni.showModal({
+					title: '提示',
+					content: '你确定要验收该项目?',
+					success(result) {
+						if (result.confirm) {
+							ProcessFn.bill_next({
 								billid: id
 							}).then(res => {
 								uni.showToast({
