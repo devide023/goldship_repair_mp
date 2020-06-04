@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="header" :style="{background: 'url('+bjimgurl+');backgroundImage: url('+bjimgurl+');'}">
+		<view class="header" :style="{backgroundImage: 'url('+bjimgurl+')'}">
 			<image class="headimg" :src="headimgurl" mode="scaleToFill" @tap="change_headimg_handle"></image>
 			<text class="username">{{userinfo.name}}</text>
 		</view>
@@ -120,7 +120,6 @@
 		height: 200rpx;
 		padding-top: 30rpx;
 		padding-bottom: 50rpx;
-		background-color: #aaffff;
 		justify-content: center;
 		align-items: center;
 	}
