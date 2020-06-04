@@ -1,10 +1,10 @@
 <template>
 	<view class="container">
 		<view class="itemrow">
-			<view>状态：<view class="status">{{repairentity.statusname.name}}
+			<view>状态：<view class="status">{{repairentity.statusname!=null?repairentity.statusname.name:''}}
 				</view>
 			</view>
-			<view>类型：<view class="type">{{repairentity.typename.name}}
+			<view>类型：<view class="type">{{repairentity.typename!=null?repairentity.typename.name:''}}
 				</view>
 			</view>
 		</view>
@@ -16,15 +16,15 @@
 		</view>
 		<slot name="repairimg"></slot>
 		<view class="itemrow last">
-			<view>报修人：{{repairentity.addusername.name}}</view>
+			<view>报修人：{{repairentity.addusername!=null?repairentity.addusername.name:''}}</view>
 			<view>报修日期：{{repairentity.addtime}}</view>
 		</view>
 		<view class="itemrow last">
-			<view>派单人：{{repairentity.sendusername.name}}</view>
+			<view>派单人：{{repairentity.sendusername!=null?repairentity.sendusername.name:''}}</view>
 			<view>派单日期：{{repairentity.sendtime}}</view>
 		</view>
 		<view class="itemrow last">
-			<view>验收人：{{repairentity.endusername.name}}</view>
+			<view>验收人：{{repairentity.endusername!=null?repairentity.endusername.name:''}}</view>
 			<view>验收日期：{{repairentity.endtime}}</view>
 		</view>
 	</view>
@@ -34,15 +34,14 @@
 	export default {
 		props: {
 			repairentity: {
-				type: Object
+				type: Object,
+				required: true
 			}
 		},
 		data() {
-			return {
-			};
+			return {};
 		},
-		methods: {
-		},
+		methods: {},
 	}
 </script>
 
@@ -84,7 +83,8 @@
 		text-indent: 1rem;
 		margin: 5rpx 0rpx;
 	}
-	.last{
+
+	.last {
 		font-size: 10px;
 	}
 </style>

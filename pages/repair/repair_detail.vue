@@ -47,11 +47,9 @@
 			},
 			onLoad(e) {
 				this.repairid = parseInt(e.id);
-			},
-			mounted() {
-				this.get_repair_info();
 				this.initprocessstep();
 				this.get_current_setp();
+				this.get_repair_info();
 			},
 			methods: {
 				initprocessstep(){
