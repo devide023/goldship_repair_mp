@@ -150,6 +150,7 @@
 				let col = e.detail.column;
 				let idx = e.detail.value;
 				let item = this.orginreglist[col][idx];
+				this.regionindex[col]=idx;
 				switch (col) {
 					case 0:
 						let ret = await RegionFn.regionlist({
