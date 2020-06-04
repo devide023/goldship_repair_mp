@@ -96,5 +96,22 @@
     },
     "uniStatistics" : {
         "enable" : false
+    },
+    "h5" : {
+        "title" : "邮轮报修管理",
+        "router" : {
+            "mode" : "hash",
+            "base" : ""
+        },
+        "devServer" : {
+            "https" : false,
+            "port" : ""
+        },
+        "template" : "index.html",
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : false
+            }
+        }
     }
 }

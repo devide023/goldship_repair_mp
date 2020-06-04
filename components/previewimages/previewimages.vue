@@ -25,9 +25,21 @@
 					current: imagepath,
 					indicator: 'default',
 					longPressActions: {
-						itemList: ['发送给朋友', '保存图片', '收藏'],
+						itemList: ['保存图片'],
 						success: function(data) {
-							console.log(data.index + 1);
+							switch (data.index){
+								case 0:
+								    uni.saveFile({
+								      tempFilePath: imagepath,
+								      success: function (res) {
+								        var savedFilePath = res.savedFilePath;
+								      }
+								    });
+									break;
+								default:
+									break;
+							}
+							
 						},
 						fail: function(err) {
 							console.log(err.errMsg);

@@ -2,9 +2,11 @@
 	<view class="evan-form-show">
 		<evan-form ref="form" :model="sendform">
 			<evan-form-item label="维修人员" prop="dealuserid">
-				<picker mode="selector" :range="dealusers" :value="dealindex" @change="selectdealuser">
-					<view class="form-input" style="width:300px;">{{dealusers[dealindex]}}</view>
-				</picker>
+				<checkbox-group @change="choose_repairusers" style="font-size:13px;">
+					<label v-for="item in orginuser" :key="item.id">
+						<checkbox :value="item.id" /><text>{{item.name}}</text>
+					</label>
+				</checkbox-group>
 			</evan-form-item>
 			<evan-form-item label="备注" label-position="top">
 				<textarea class="form-input textarea" placeholder-class="form-input-placeholder" v-model="sendform.note"
@@ -24,16 +26,15 @@
 		data() {
 			return {
 				orginuser:[],
-				dealusers:[],
-				dealindex:0,
 				sendform: {
 					billid:0,
-					dealuserid:0,
+					dealuserid:[],
 					senduser:'',
 					note:''
 				},
 				rules:{
 					dealuserid: {
+						type:'array',
 						required: true,
 						message: '请选择维修人员'
 					},
@@ -52,18 +53,22 @@
 			getrepairuserlist(){
 				repairfn.repairusers().then(res=>{
 					this.orginuser = res.data.result;
-					this.dealusers = res.data.result.map(function(i){
-						return i.name;
-					});
 				})
 			},
 			init(){
 				this.sendform.senduser = uni.getStorageSync('userinfo').name;
 			},
-			selectdealuser(e) {
-				console.log(e.target.value);
-				this.dealindex = e.target.value;
-				this.sendform.dealuserid = this.orginuser[e.target.value].id;
+			choose_repairusers(e){
+				 let ids = e.detail.value;
+				 this.sendform.dealuserid = ids;
+				 for(let i = 0; i<this.orginuser.length; i++) {
+					 const item = this.orginuser[i]
+					 if(ids.includes(item.id)){
+						 this.$set(item,'checked',true)
+					 }else{
+						 this.$set(item,'checked',false)
+					 }
+				 }
 			},
 			send_form_data(){
 				this.$refs.form.validate((v)=>{
@@ -85,9 +90,6 @@
 </script>
 
 <style lang="scss">
-	.evan-form-item-container__main{
-		justify-content: flex-end;
-	}
 	.evan-form-show {
 		padding: 0 30rpx;
 		background-color: #fff;

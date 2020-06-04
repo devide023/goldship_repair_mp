@@ -133,6 +133,7 @@
 			display: flex;
 			align-items: center;
 			overflow: hidden;
+			justify-content: flex-end;
 		}
 
 		&--left {

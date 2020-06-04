@@ -6,12 +6,12 @@
 			</evan-form-item>
 			<evan-form-item label="性别" prop="sex">
 				<picker mode="selector" :range="sexlist" @change="choosesex">
-					<view class="form-input" style="width:300px;">{{sexlist[sexindex]}}</view>
+					<view class="form-input">{{sexlist[sexindex]}}</view>
 				</picker>
 			</evan-form-item>
 			<evan-form-item label="出生日期" prop="birthdate">
 				<picker mode="date" :value="form.birthdate" @change="choosebirthdate">
-					<view class="form-input" style="width:300px;">{{form.birthdate}}</view>
+					<view class="form-input">{{form.birthdate}}</view>
 				</picker>
 			</evan-form-item>
 			<evan-form-item label="身份证号">
@@ -26,7 +26,7 @@
 			<evan-form-item label="区域">
 				<picker mode="multiSelector" :range="orginreglist" :value="regionindex" :range-key="key" @columnchange="colchangehandle"
 				 @change="chooseregion">
-					<view class="form-input" style="width:300px;">{{regionname}}</view>
+					<view class="form-input">{{regionname}}</view>
 				</picker>
 			</evan-form-item>
 			<evan-form-item label="联系地址" prop="adress" label-position="top">
@@ -180,10 +180,6 @@
 </script>
 
 <style lang="scss">
-	.evan-form-item-container__main {
-		justify-content: flex-end;
-	}
-
 	.evan-form-show {
 		padding: 0 30rpx;
 		background-color: #fff;

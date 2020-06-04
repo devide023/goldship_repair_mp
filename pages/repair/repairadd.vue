@@ -6,7 +6,7 @@
 			</evan-form-item>
 			<evan-form-item label="类型" prop="type">
 				<picker mode="selector" :range="typenames" :value="typeindex" @change="selecttype">
-					<view class="form-input" style="width:300px;">{{typenames[typeindex]}}</view>
+					<view class="form-input">{{typenames[typeindex]}}</view>
 				</picker>
 			</evan-form-item>
 			<evan-form-item label="标题" prop="title">
@@ -204,9 +204,6 @@
 </script>
 
 <style lang="scss">
-	.evan-form-item-container__main{
-		justify-content: flex-end;
-	}
 	.evan-form-show {
 		padding: 0 30rpx;
 		background-color: #fff;

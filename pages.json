@@ -86,6 +86,10 @@
             "path" : "pages/my/edituser",
             "style" : {}
         }
+        ,{
+            "path" : "pages/report/repair_report",
+            "style" : {}
+        }
     ],
 
 	"globalStyle": {
@@ -97,6 +101,11 @@
 	"condition": {
 		"current": 0,
 		"list": [
+			{
+				"name":"sendbill",
+				"path":"pages/repair/send_bill",
+				"query":"id=36"
+			},
 			{
 				"name":"myindex",
 				"path":"pages/my/my"
