@@ -80,15 +80,21 @@
         }
         ,{
             "path" : "pages/my/changepwd",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"密码修改"
+			}
         }
         ,{
             "path" : "pages/my/edituser",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"信息编辑"
+			}
         }
         ,{
             "path" : "pages/report/repair_report",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"报修图表"
+			}
         }
     ],
 
@@ -101,6 +107,10 @@
 	"condition": {
 		"current": 0,
 		"list": [
+			{
+				"name":"chart",
+				"path":"pages/report/repair_report"
+			},
 			{
 				"name":"sendbill",
 				"path":"pages/repair/send_bill",
