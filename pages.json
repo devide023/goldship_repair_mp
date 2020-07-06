@@ -96,6 +96,12 @@
 				"navigationBarTitleText":"报修图表"
 			}
         }
+        ,{
+            "path" : "pages/wechat/bindwechatuser",
+            "style" : {
+				"navigationBarTitleText":"绑定系统账号"
+			}
+        }
     ],
 
 	"globalStyle": {
@@ -107,6 +113,10 @@
 	"condition": {
 		"current": 0,
 		"list": [
+			{
+				"name":"binduser",
+				"path":"pages/wechat/bindwechatuser"
+			},
 			{
 				"name":"chart",
 				"path":"pages/report/repair_report"

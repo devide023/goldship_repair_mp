@@ -1,5 +1,6 @@
 <script>
 	import util from 'utils/index.js'
+	import updatefn from 'api/update.js'
 	export default {
 		onLaunch: function() {
 			//#ifdef APP-PLUS 
@@ -16,7 +17,7 @@
 							content: res.data.msg,
 							success: (ret) => {
 								if (ret.confirm) {
-									plus.runtime.openURL(ret.data.url);
+									updatefn.UpdateOfApk(ret.data.url);
 								}
 							}
 						})

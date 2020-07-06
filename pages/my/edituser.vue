@@ -143,8 +143,8 @@
 				this.regionindex = pos;
 				this.form.province = this.orginreglist[0][pos[0]].id;
 				this.form.city = this.orginreglist[1][pos[1]].id;
-				this.form.district = this.orginreglist[2][pos[1]].id;
-				this.regionname = this.orginreglist[0][pos[0]].name + this.orginreglist[1][pos[1]].name + this.orginreglist[2][pos[1]].name
+				this.form.district = this.orginreglist[2][pos[2]].id;
+				this.regionname = this.orginreglist[0][pos[0]].name + this.orginreglist[1][pos[1]].name + this.orginreglist[2][pos[2]].name
 			},
 			async colchangehandle(e) {
 				let col = e.detail.column;

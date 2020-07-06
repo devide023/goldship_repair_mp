@@ -1,4 +1,4 @@
-const url = 'http://192.168.20.72:8081';
+const url = 'https://489d50e9.vip.cpolar.cn';
 const baseurl = url + '/api';
 const rooturl = url + '/';
 export default {

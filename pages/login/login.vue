@@ -26,10 +26,15 @@
 		</view>
 		<!-- 登录提交 -->
 		<button class="submit" type="primary" @tap="login">登录</button>
+		
+		<view class="describe">
+			特别说明：该登录界面仅限于重庆长江黄金游轮管理分公司内部员工使用。
+		</view>
 	</view>
 </template>
 <script>
 	import LoginFn from '../../api/login.js'
+	import weixin from '../../api/wechat/index.js'
 	export default {
 		data() {
 			const isUni = typeof(uni) !== 'undefined'
@@ -65,11 +70,36 @@
 						});
 					} else {
 						uni.showModal({
-							title:"提示",
-							content:result.data.msg,
+							title: "提示",
+							content: result.data.msg,
 						});
 					}
 				});
+			},
+			getUserInfo(e) {
+				let userinfo = e.detail.userInfo;
+				uni.login({
+					provider:'weixin',
+					success(resdata) {
+						let code = resdata.code;						
+						weixin.weixinlogin({
+							code:code
+						}).then(res=>{
+							console.log(res.data.result);
+							weixin.savewechatinfo({
+								openid:res.data.result.openid,
+								nickname:userinfo.nickName,
+								avatarurl:userinfo.avatarUrl,
+								city:userinfo.city,
+								province:userinfo.province,
+								gender:userinfo.gender
+							}).then(resd=>{
+								console.log(resd);
+							})
+							uni.setStorageSync('wechatinfo',res.data.result);
+						});
+					}
+				})
 			}
 		}
 	}
@@ -95,6 +125,7 @@
 		justify-content: center;
 		padding-top: 30px;
 		padding-bottom: 50px;
+
 		.head_bg {
 			border-radius: 50px;
 			width: 60px;
@@ -202,5 +233,12 @@
 			font-size: 13px;
 			color: $text-color;
 		}
+	}
+
+	.describe {
+		margin-top: 50rpx;
+		color: #acacac;
+		padding-left: 25rpx;
+		padding-right: 25rpx;
 	}
 </style>
